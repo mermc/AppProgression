@@ -1,0 +1,26 @@
+<mat-card>
+  <h2>Crear cuenta</h2>
+  <form #registerForm="ngForm" (ngSubmit)="onRegister()">
+     <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput type="nombre" required [(ngModel)]="nombre" name="nombre">
+    </mat-form-field>
+
+     <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Apellidos</mat-label>
+      <input matInput type="apellidos" required [(ngModel)]="apellidos" name="apellidos">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" required [(ngModel)]="email" name="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" required [(ngModel)]="password" name="password">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Registrarme</button>
+  </form>
+</mat-card>

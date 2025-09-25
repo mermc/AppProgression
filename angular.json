@@ -11,9 +11,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular/build:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
+            "index": "src/index.html",
+            "outputPath": "dist/bienestar-app",
             "polyfills": [
               "zone.js"
             ],
@@ -25,13 +27,9 @@
               }
             ],
             "styles": [
+              "src/custom-theme.scss",
               "src/styles.css"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {

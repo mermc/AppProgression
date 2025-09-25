@@ -1,0 +1,39 @@
+<!-- 
+  Tarjeta de Angular Material para el formulario de login 
+-->
+<mat-card>
+  <h2>Iniciar sesión</h2>
+  <!-- Formulario de login con Angular forms y Material -->
+  <form #loginForm="ngForm" (ngSubmit)="onLogin()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" required [(ngModel)]="email" name="email">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" required [(ngModel)]="password" name="password">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Entrar</button>
+  </form>
+
+  <!-- Enlace para ir a la pantalla de registro -->
+  <p>
+    ¿No tienes cuenta?
+    <button mat-button color="accent" (click)="goToRegister()">Registrarme</button>
+  </p>
+
+  <!-- Mensaje si el correo no está verificado -->
+  <p *ngIf="verificationMessage" style="color: red;">
+    {{ verificationMessage }}
+    <!-- Botón para reenviar el correo de verificación -->
+    <!-- Solo se muestra si el correo no está verificado -->
+    <button mat-button color="warn" (click)="resendVerificationEmail()">
+      Reenviar correo de verificación
+    </button>
+  </p>
+
+  <!-- Mensaje si ocurre un error (credenciales incorrectas, etc.) -->
+  <p *ngIf="errorMessage" style="color: red;">
+    {{ errorMessage }}
+  </p>
+</mat-card>
