@@ -5,12 +5,17 @@ export const routes: Routes = [
     {
     path: 'login',
     loadComponent: () =>
-      import('./auth/login/login').then(m => m.LoginComponent)
+      import('./features/auth/components/login/login').then(m => m.LoginComponent)
   },
   {
     path: 'register',
     loadComponent: () =>
-      import('./auth/register/register').then(m => m.RegisterComponent)
+      import('./features/auth/components/register/register').then(m => m.RegisterComponent)
+  },
+  {
+    path: 'dashboard',
+    loadComponent: () =>
+      import('./features/dashboard/dashboard').then(m => m.Dashboard)
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'login' } // por si alguien pone mal la ruta

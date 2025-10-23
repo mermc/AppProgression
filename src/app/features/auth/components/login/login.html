@@ -5,14 +5,17 @@
   <h2>Iniciar sesión</h2>
   <!-- Formulario de login con Angular forms y Material -->
   <form #loginForm="ngForm" (ngSubmit)="onLogin()">
+    <!-- Campo para el email. Limpia error al escribir -->
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Email</mat-label>
-      <input matInput type="email" required [(ngModel)]="email" name="email">
+      <input matInput type="email" required [(ngModel)]="email" name="email" (ngModelChange)="clearError()">
     </mat-form-field>
+    <!-- Campo para la contraseña. Limpia error al escribir -->
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Contraseña</mat-label>
-      <input matInput type="password" required [(ngModel)]="password" name="password">
+      <input matInput type="password" required [(ngModel)]="password" name="password" (ngModelChange)="clearError()">
     </mat-form-field>
+    <!-- Botón para enviar el formulario -->
     <button mat-raised-button color="primary" type="submit">Entrar</button>
   </form>
 
