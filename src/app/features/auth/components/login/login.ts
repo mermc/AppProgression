@@ -55,8 +55,6 @@ export class LoginComponent {
 
       // Al iniciar sesión, aseguramos que el perfil exista o se actualice (ej. lastSignInTime).
       // No pasamos 'nombre' ni 'apellidos' aquí, ya que deberían estar en Firestore.
-      await this.firestoreService.createUserProfile(user);
-
 
       // Si el usuario ha verificado el correo electrónico
       if (user.emailVerified) {

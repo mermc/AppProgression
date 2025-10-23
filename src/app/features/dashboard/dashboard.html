@@ -1,4 +1,39 @@
-<mat-card>
-  <h2>¡Bienvenido al Dashboard!</h2>
-  <p>Si ves esta pantalla, el login ha funcionado correctamente.</p>
-</mat-card>
+<!-- Barra de navegación -->
+<mat-toolbar color="primary" class="toolbar">
+  <span class="app-title">Mi Panel</span>
+
+  <span class="spacer"></span>
+
+  <button mat-button (click)="cambiarVista('personas')" [disabled]="vistaActual === 'personas'">Personas</button>
+  <button mat-button (click)="cambiarVista('grupos')" [disabled]="vistaActual === 'grupos'">Grupos</button>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="irAPerfil()">Ver Perfil</button>
+    <!--<button mat-menu-item (click)="logout()">Cerrar sesión</button>-->
+  </mat-menu>
+</mat-toolbar>
+
+<!-- Contenido principal -->
+<div class="contenido">
+  <mat-card>
+    <h2 *ngIf="vistaActual === 'personas'">Personas</h2>
+    <h2 *ngIf="vistaActual === 'grupos'">Grupos</h2>
+
+    <mat-list>
+      <mat-list-item *ngFor="let item of (vistaActual === 'personas' ? personas$ : grupos$) | async"
+                     (click)="irADetalle(item, vistaActual)">
+        <mat-icon matListIcon>{{ vistaActual === 'personas' ? 'person' : 'group' }}</mat-icon>
+        <h4 matLine>{{ item.nombre }}</h4>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+
+  <!-- Botón flotante -->
+  <button mat-fab color="accent" class="add-btn" (click)="crearNuevo()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
