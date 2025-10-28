@@ -28,7 +28,7 @@ import { CommonModule } from '@angular/common';
     MatMenuModule
   ]
 })
-export class DashboardComponent implements OnInit {
+export class Dashboard implements OnInit {
 
   personas$: Observable<any[]>;
   grupos$: Observable<any[]>;
@@ -51,7 +51,6 @@ export class DashboardComponent implements OnInit {
     this.vistaActual = tipo;
   }
 
-  // esto hay que arreglarlo porque estaba en singular y he puesto plural
   irADetalle(item: any, tipo: 'personas' | 'grupos') {
     this.router.navigate(['/dashboard/detalle', tipo, item.id]);
   }
@@ -62,6 +61,9 @@ export class DashboardComponent implements OnInit {
   }
 
   crearNuevo() {
-    this.router.navigate(['/dashboard/nuevo']);
+      console.log('Ir a crear nuevo');
+    this.router.navigate(['/dashboard/component/nuevo']);
   }
+
+
 }

@@ -7,7 +7,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private firebaseApp = initializeApp(environment.firebase);
+  private firebaseApp = initializeApp(environment.firebaseConf);
   private auth = getAuth(this.firebaseApp);
   private userSubject = new BehaviorSubject<User | null>(null);
   

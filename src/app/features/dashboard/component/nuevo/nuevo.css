@@ -1,0 +1,23 @@
+.container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.acciones {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.seleccion {
+  text-align: center;
+}
+
+.seleccion button {
+  margin: 10px;
+}

@@ -43,3 +43,6 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Ignorar claves y archivos de entorno
+echo "/src/environments/" >> .gitignore
