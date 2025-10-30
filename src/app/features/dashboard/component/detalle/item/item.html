@@ -1,0 +1,22 @@
+<div class="container">
+  <h2 *ngIf="!modoEdicion">Nuevo ítem</h2>
+  <h2 *ngIf="modoEdicion">Editar ítem</h2>
+
+  <form [formGroup]="form" (ngSubmit)="guardar()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descripción</mat-label>
+      <input matInput formControlName="descripcion" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Color</mat-label>
+      <!-- input tipo color para elegir color; también se puede usar select -->
+      <input matInput type="color" formControlName="color" />
+    </mat-form-field>
+
+    <div class="acciones">
+      <button mat-stroked-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+      <button mat-raised-button color="primary" type="submit">{{ modoEdicion ? 'Guardar' : 'Crear' }}</button>
+    </div>
+  </form>
+</div>

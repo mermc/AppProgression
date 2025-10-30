@@ -1,3 +1,4 @@
+
 <div class="container">
   <h2>Crear nuevo</h2>
 
@@ -6,6 +7,9 @@
     <p>¿Qué deseas crear?</p>
     <button mat-raised-button color="primary" (click)="seleccionarTipo('persona')">Persona</button>
     <button mat-raised-button color="accent" (click)="seleccionarTipo('grupo')">Grupo</button>
+    <div class="acciones">
+    <button mat-stroked-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+    </div>
   </div>
 
   <!-- Formulario -->

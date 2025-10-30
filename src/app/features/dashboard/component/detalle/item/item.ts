@@ -1,0 +1,119 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  Firestore,
+  collection,
+  addDoc,
+  doc,
+  getDoc,
+  updateDoc,
+  collectionData,
+  serverTimestamp
+} from '@angular/fire/firestore';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+@Component({
+  selector: 'app-item',
+  standalone: true,
+  templateUrl: './item.html',
+  styleUrls: ['./item.css'],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule
+  ]
+})
+export class Item implements OnInit {
+  form: FormGroup;
+  modoEdicion = false;
+  itemId: string | null = null;           // id del item si estamos editando
+  parentTipo!: 'personas' | 'grupos'; // 'personas' o 'grupos'
+  parentId!: string;                  // id de la persona/grupo padre
+
+  constructor(
+    private fb: FormBuilder,
+    private firestore: Firestore,
+    private router: Router,
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
+  ) {
+    // campo sin tilde: descripcion
+    this.form = this.fb.group({
+      descripcion: ['', Validators.required],
+      color: ['#2196f3'] // valor por defecto
+    });
+  }
+
+  async ngOnInit() {
+    // esperamos los parámetros: tipo (personas|grupos), id(id de persona/grupo) y opcional id del item
+    this.parentTipo = this.route.snapshot.paramMap.get('tipo') as 'personas' | 'grupos';
+    this.parentId = this.route.snapshot.paramMap.get('id') || '';
+    this.itemId = this.route.snapshot.paramMap.get('itemId');
+
+    if (!this.parentTipo || !this.parentId) {
+      this.snackBar.open('Faltan parámetros para crear el item', 'Cerrar', { duration: 3000 });
+      this.router.navigate(['/dashboard']);
+      return;
+    }
+
+    if (this.itemId) {
+      this.modoEdicion = true;
+      const docRef = doc(this.firestore, `${this.parentTipo}/${this.parentId}/items/${this.itemId}`);
+      const snap = await getDoc(docRef);
+      if (snap.exists()) {
+        this.form.patchValue(snap.data());
+      } else {
+        this.snackBar.open('Item no encontrado', 'Cerrar', { duration: 2000 });
+        this.router.navigate([`/dashboard/detalle/${this.parentTipo}/${this.parentId}`]);
+      }
+    }
+  }
+
+  async guardar() {
+    if (this.form.invalid) {
+      this.snackBar.open('Completa los datos correctamente', 'Cerrar', { duration: 2000 });
+      return;
+    }
+
+    const datos = {
+      ...this.form.value,
+      updatedAt: serverTimestamp()
+    };
+
+    try {
+      const coleccionPath = `${this.parentTipo}/${this.parentId}/items`;
+
+      if (this.modoEdicion && this.itemId) {
+        // update
+        await updateDoc(doc(this.firestore, `${coleccionPath}/${this.itemId}`), datos);
+        this.snackBar.open('Item actualizado correctamente', 'OK', { duration: 2000 });
+      } else {
+        // create
+        await addDoc(collection(this.firestore, coleccionPath), {
+          ...datos,
+          createdAt: serverTimestamp()
+        });
+        this.snackBar.open('Item creado correctamente', 'OK', { duration: 2000 });
+      }
+
+      // volver al detalle del padre
+      this.router.navigate([`/dashboard/detalle/${this.parentTipo}/${this.parentId}`]);
+    } catch (err) {
+      console.error(err);
+      this.snackBar.open('Error al guardar el item', 'Cerrar', { duration: 3000 });
+    }
+  }
+
+  cancelar() {
+    this.router.navigate([`/dashboard/detalle/${this.parentTipo}/${this.parentId}`]);
+  }
+}

@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core';
-import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut,
-  UserCredential, onAuthStateChanged, User } from 'firebase/auth';
-import { environment } from '../../../environments/environment';
-import { Observable, BehaviorSubject } from 'rxjs';
+import {
+  Auth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  UserCredential,
+  onAuthStateChanged,
+  User
+} from '@angular/fire/auth';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private firebaseApp = initializeApp(environment.firebaseConf);
-  private auth = getAuth(this.firebaseApp);
   private userSubject = new BehaviorSubject<User | null>(null);
-  
-  // Observable del estado del usuario
   user$ = this.userSubject.asObservable();
 
-  constructor() {
-    // Escuchar cambios en el estado de autenticación
+  constructor(private auth: Auth) {
     onAuthStateChanged(this.auth, (user) => {
       this.userSubject.next(user);
     });
   }
+
 
   login(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password);

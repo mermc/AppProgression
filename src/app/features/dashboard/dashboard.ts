@@ -51,18 +51,18 @@ export class Dashboard implements OnInit {
     this.vistaActual = tipo;
   }
 
-  irADetalle(item: any, tipo: 'personas' | 'grupos') {
-    this.router.navigate(['/dashboard/detalle', tipo, item.id]);
+  crearNuevo() {
+      console.log('Ir a crear nuevo');
+    this.router.navigate(['/dashboard/nuevo']);
   }
 
+  irADetalle(item: any, tipo: 'personas' | 'grupos') {
+  console.log('Navegando al detalle:', tipo, item.id);
+  this.router.navigate([`/dashboard/detalle/${tipo}/${item.id}`]);
+}
 
   irAPerfil() {
     this.router.navigate(['/perfil']);
-  }
-
-  crearNuevo() {
-      console.log('Ir a crear nuevo');
-    this.router.navigate(['/dashboard/component/nuevo']);
   }
 
 

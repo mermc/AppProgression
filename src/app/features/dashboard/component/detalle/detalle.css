@@ -1,0 +1,30 @@
+.detalle-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+mat-card {
+  max-width: 600px;
+  width: 100%;
+  padding: 2rem;
+}
+
+.campo {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.botones {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cargando {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+}
