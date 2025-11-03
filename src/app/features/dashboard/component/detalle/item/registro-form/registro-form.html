@@ -1,0 +1,22 @@
+<div class="registro-form-container">
+  <h2>{{ modoEdicion ? 'Editar registro' : 'Nuevo registro' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="guardar()">
+    <mat-form-field appearance="outline" class="campo" floatLabel="always">
+      <mat-label>Fecha</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="fecha" aria-label="Fecha"/>
+      <mat-datepicker-toggle matSuffix [for]="picker" aria-label="Abrir selector de fecha"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="campo">
+      <mat-label>Nota u observación</mat-label>
+      <textarea matInput rows="3" formControlName="nota" aria-label="Nota u observación"></textarea>
+    </mat-form-field>
+
+    <div class="botones">
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
+      <button mat-stroked-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+</div>

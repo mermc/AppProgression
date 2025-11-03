@@ -35,23 +35,51 @@ export const routes: Routes = [
   },
   
 {
-  path: 'dashboard/detalle/:tipo/:id/item/:itemId', // edición
+  path: 'dashboard/detalle/:tipo/:id/items/:itemId', // edición
   canActivate: [authGuard],
   loadComponent: () =>
     import('./features/dashboard/component/detalle/item/item').then(m => m.Item)
 },
    {
-  path: 'dashboard/detalle/:tipo/:id/item',
+  path: 'dashboard/detalle/:tipo/:id/items', // creación
   canActivate: [authGuard],
   loadComponent: () =>
     import('./features/dashboard/component/detalle/item/item').then(m => m.Item)
 },
 {
-    path: 'dashboard/editar/:tipo/:id',
+    path: 'dashboard/editar/:tipo/:id', // edición del padre
     canActivate: [authGuard],
     loadComponent: () =>
       import('./features/dashboard/component/nuevo/nuevo').then(m => m.Nuevo), // reutilizamos "nuevo" como formulario de edición
   },
+  {
+  path: 'dashboard/detalle/:tipo/:id/items',
+  canActivate: [authGuard],
+  loadComponent: () =>
+    import('./features/dashboard/component/detalle/item-list/item-list')
+      .then(m => m.ItemList)
+},
+
+// Registros (subcolección dentro de items) - lista, nuevo, edición
+  {
+    path: 'dashboard/detalle/:tipo/:id/items/:itemId/registros',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/dashboard/component/detalle/item/registro-list/registro-list').then(m => m.RegistroList)
+  },
+  {
+    path: 'dashboard/detalle/:tipo/:id/items/:itemId/registros/nuevo',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/dashboard/component/detalle/item/registro-form/registro-form').then(m => m.RegistroForm)
+  },
+  {
+    path: 'dashboard/detalle/:tipo/:id/items/:itemId/registros/:registroId',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/dashboard/component/detalle/item/registro-form/registro-form').then(m => m.RegistroForm)
+  },
+
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'login' } // por si alguien pone mal la ruta

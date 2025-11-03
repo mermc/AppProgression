@@ -1,0 +1,19 @@
+.registro-list-container {
+  padding: 16px;
+}
+
+mat-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.registro-info {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  margin-bottom: 12px;
+}
+

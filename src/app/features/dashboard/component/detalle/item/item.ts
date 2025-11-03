@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Timestamp } from 'firebase/firestore';
 
 @Component({
   selector: 'app-item',
@@ -46,12 +47,14 @@ export class Item implements OnInit {
     private route: ActivatedRoute,
     private snackBar: MatSnackBar
   ) {
-    // campo sin tilde: descripcion
     this.form = this.fb.group({
-      descripcion: ['', Validators.required],
-      color: ['#2196f3'] // valor por defecto
-    });
+  descripcion: ['', Validators.required],
+  color: ['#2196f3'],
+  fecha: [new Date().toISOString().substring(0, 10), Validators.required] // formato YYYY-MM-DD
+});
   }
+  
+
 
   async ngOnInit() {
     // esperamos los parámetros: tipo (personas|grupos), id(id de persona/grupo) y opcional id del item
@@ -85,9 +88,10 @@ export class Item implements OnInit {
     }
 
     const datos = {
-      ...this.form.value,
-      updatedAt: serverTimestamp()
-    };
+  ...this.form.value,
+  updatedAt: serverTimestamp(),
+  fecha: new Date(this.form.value.fecha)
+};
 
     try {
       const coleccionPath = `${this.parentTipo}/${this.parentId}/items`;
@@ -111,6 +115,10 @@ export class Item implements OnInit {
       console.error(err);
       this.snackBar.open('Error al guardar el item', 'Cerrar', { duration: 3000 });
     }
+  }
+
+  verRegistros(){
+    this.router.navigate([`/dashboard/detalle/${this.parentTipo}/${this.parentId}/items/${this.itemId}/registros`]);
   }
 
   cancelar() {

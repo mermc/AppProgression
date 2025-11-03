@@ -112,13 +112,17 @@ export class Detalle implements OnInit {
     this.snackBar.open('No se puede añadir item: faltan parámetros', 'Cerrar', { duration: 2000 });
     return;
   }
-  const url = this.router.createUrlTree([`/dashboard/detalle/${this.tipo}/${this.id}/item`]).toString();
+  const url = this.router.createUrlTree([`/dashboard/detalle/${this.tipo}/${this.id}/items`]).toString();
   console.log('[Detalle] URL generada con createUrlTree():', url);
   
-  const ruta = `/dashboard/detalle/${this.tipo}/${this.id}/item`;
+  const ruta = `/dashboard/detalle/${this.tipo}/${this.id}/items`;
    console.log('[Detalle] Navegando a:', ruta);
   // ruta: /dashboard/detalle/:tipo/:id/item  (creación)
   this.router.navigate([ruta]);
  
+}
+
+verItems() {
+  const ruta=`/dashboard/detalle/${this.tipo}/${this.id}/items`;
 }
 }
