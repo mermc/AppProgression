@@ -33,32 +33,31 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/dashboard/component/detalle/detalle').then(m => m.Detalle)
   },
-  
+
+// LISTADO DE ITEMS
 {
-  path: 'dashboard/detalle/:tipo/:id/items/:itemId', // edición
-  canActivate: [authGuard],
-  loadComponent: () =>
-    import('./features/dashboard/component/detalle/item/item').then(m => m.Item)
-},
-   {
-  path: 'dashboard/detalle/:tipo/:id/items', // creación
-  canActivate: [authGuard],
-  loadComponent: () =>
-    import('./features/dashboard/component/detalle/item/item').then(m => m.Item)
-},
-{
-    path: 'dashboard/editar/:tipo/:id', // edición del padre
-    canActivate: [authGuard],
-    loadComponent: () =>
-      import('./features/dashboard/component/nuevo/nuevo').then(m => m.Nuevo), // reutilizamos "nuevo" como formulario de edición
-  },
-  {
   path: 'dashboard/detalle/:tipo/:id/items',
   canActivate: [authGuard],
   loadComponent: () =>
-    import('./features/dashboard/component/detalle/item-list/item-list')
-      .then(m => m.ItemList)
+    import('./features/dashboard/component/detalle/item-list/item-list').then(m => m.ItemList)
 },
+
+// NUEVO ITEM
+{
+  path: 'dashboard/detalle/:tipo/:id/items/nuevo',
+  canActivate: [authGuard],
+  loadComponent: () =>
+    import('./features/dashboard/component/detalle/item/item').then(m => m.Item)
+},
+
+// EDITAR ITEM
+{
+  path: 'dashboard/detalle/:tipo/:id/items/:itemId',
+  canActivate: [authGuard],
+  loadComponent: () =>
+    import('./features/dashboard/component/detalle/item/item').then(m => m.Item)
+},
+
 
 // Registros (subcolección dentro de items) - lista, nuevo, edición
   {
@@ -79,6 +78,15 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/dashboard/component/detalle/item/registro-form/registro-form').then(m => m.RegistroForm)
   },
+  
+  //PERFIL
+  {
+  path: 'dashboard/perfil',
+  canActivate: [authGuard],
+  loadComponent: () =>
+    import('./features/dashboard/perfil/perfil').then(m => m.Perfil)
+},
+
 
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },

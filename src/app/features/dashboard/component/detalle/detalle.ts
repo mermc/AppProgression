@@ -115,7 +115,7 @@ export class Detalle implements OnInit {
   const url = this.router.createUrlTree([`/dashboard/detalle/${this.tipo}/${this.id}/items`]).toString();
   console.log('[Detalle] URL generada con createUrlTree():', url);
   
-  const ruta = `/dashboard/detalle/${this.tipo}/${this.id}/items`;
+  const ruta = `/dashboard/detalle/${this.tipo}/${this.id}/items/nuevo`;
    console.log('[Detalle] Navegando a:', ruta);
   // ruta: /dashboard/detalle/:tipo/:id/item  (creación)
   this.router.navigate([ruta]);
@@ -123,6 +123,10 @@ export class Detalle implements OnInit {
 }
 
 verItems() {
-  const ruta=`/dashboard/detalle/${this.tipo}/${this.id}/items`;
+  console.log('[Detalle] Entrando en verItems()');
+  console.log('[Detalle] Tipo actual:', this.tipo);
+  console.log('[Detalle] ID actual:', this.id);
+  const ruta = `/dashboard/detalle/${this.tipo}/${this.id}/items`;
+  this.router.navigate([ruta]);
 }
 }

@@ -1,0 +1,17 @@
+<div class="perfil-container">
+  <mat-card *ngIf="perfil; else cargando">
+    <h2>Perfil de usuario</h2>
+    <p><strong>Nombre:</strong> {{ perfil.nombre || 'Sin nombre' }}</p>
+    <p><strong>Apellidos:</strong> {{ perfil.apellidos || 'Sin apellidos' }}</p>
+    <p><strong>Correo:</strong> {{ perfil.email }}</p>
+    <p><strong>UID:</strong> {{ perfil.uid }}</p>
+
+    <div class="acciones">
+      <button mat-raised-button color="primary" (click)="volver()">Volver al Dashboard</button>
+    </div>
+  </mat-card>
+
+  <ng-template #cargando>
+    <p>Cargando perfil...</p>
+  </ng-template>
+</div>

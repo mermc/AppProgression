@@ -13,6 +13,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { query, orderBy } from 'firebase/firestore';
+import { RegistroList } from '../item/registro-list/registro-list';
+
+
 
 @Component({
   selector: 'app-itemlist',
@@ -25,6 +28,8 @@ export class ItemList implements OnInit {
   tipo!: 'personas' | 'grupos';
   parentId!: string;
   items$!: Observable<any[]>;
+  id!: string;
+  itemId!: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,6 +47,16 @@ const q = query(itemsRef, orderBy('fecha', 'desc'));
 this.items$ = collectionData(q, { idField: 'id' });
   }
 
+  toggleRegistros(item: any) {
+    item.showRegistros = !item.showRegistros;
+  }
+
+  nuevoRegistro(itemId: string) {
+  this.router.navigate([
+    `/dashboard/detalle/${this.tipo}/${this.parentId}/items/${itemId}/registros/nuevo`
+  ]);
+}
+
   editarItem(itemId: string) {
     this.router.navigate([`/dashboard/detalle/${this.tipo}/${this.parentId}/items/${itemId}`]);
   }
@@ -58,7 +73,15 @@ this.items$ = collectionData(q, { idField: 'id' });
     }
   }
 
+
+  verRegistros(itemId: string) {
+  this.router.navigate([`/dashboard/detalle/${this.tipo}/${this.parentId}/items/${itemId}/registros`]);
+}
+
+
+
   volver() {
     this.router.navigate([`/dashboard/detalle/${this.tipo}/${this.parentId}`]);
   }
+
 }

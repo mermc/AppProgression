@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { AuthService } from '../../core/services/auth.service';
 
 // Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -37,7 +38,8 @@ export class Dashboard implements OnInit {
   constructor(
     private firestore: Firestore,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     const personasRef = collection(this.firestore, 'personas');
     const gruposRef = collection(this.firestore, 'grupos');
@@ -62,8 +64,18 @@ export class Dashboard implements OnInit {
 }
 
   irAPerfil() {
-    this.router.navigate(['/perfil']);
+    this.router.navigate(['/dashboard/perfil']);
   }
+
+  async logout() {
+  try {
+    await this.authService.logout();
+    this.router.navigate(['/login']); // desmonta dashboard y perfil
+  } catch (error) {
+    console.error('Error al cerrar sesión:', error);
+  }
+}
+
 
 
 }

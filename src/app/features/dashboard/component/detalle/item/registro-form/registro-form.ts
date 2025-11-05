@@ -78,6 +78,12 @@ export class RegistroForm implements OnInit {
 
   cancelar() {
     this.router.navigate([
+      `/dashboard/detalle/${this.tipo}/${this.id}/items`
+    ]);
+  }
+
+  cancelarRegistros() {
+    this.router.navigate([
       `/dashboard/detalle/${this.tipo}/${this.id}/items/${this.itemId}/registros`
     ]);
   }

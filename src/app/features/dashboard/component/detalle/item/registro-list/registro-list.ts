@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, deleteDoc  } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
@@ -16,9 +16,10 @@ import { MatCard } from "@angular/material/card";
 })
 export class RegistroList implements OnInit {
   registros$!: Observable<any[]>;
-  tipo!: 'personas' | 'grupos';
-  id!: string;
-  itemId!: string;
+  @Input() tipo!: 'personas' | 'grupos'; // ahora puede recibir tipo
+  @Input() id!: string;                  //  ahora puede recibir el id del padre
+  @Input() itemId!: string;              //  ahora puede recibir el id del item
+
 
   constructor(
     private firestore: Firestore,
@@ -42,9 +43,38 @@ export class RegistroList implements OnInit {
     this.registros$ = collectionData(ref, { idField: 'id' });
   }
 
+  
+
   nuevoRegistro() {
     this.router.navigate([
       `/dashboard/detalle/${this.tipo}/${this.id}/items/${this.itemId}/registros/nuevo`
     ]);
+  }
+
+  editarRegistro(registroId: string) {
+    this.router.navigate([
+      `/dashboard/detalle/${this.tipo}/${this.id}/items/${this.itemId}/registros/${registroId}`
+    ]);
+  }
+
+  async eliminarRegistro(registroId: string) {
+    const confirmacion = confirm('¿Seguro que deseas eliminar este registro?');
+    if (!confirmacion) return;
+
+    try {
+      const docRef = doc(this.firestore, `${this.tipo}/${this.id}/items/${this.itemId}/registros/${registroId}`);
+      await deleteDoc(docRef);
+      this.snackBar.open('Registro eliminado correctamente', 'Cerrar', { duration: 2000 });
+    } catch (err) {
+      console.error(err);
+      this.snackBar.open('Error al eliminar el registro', 'Cerrar', { duration: 3000 });
+    }
+  }
+
+  cancelar() {
+    const ruta = `/dashboard/detalle/${this.tipo}/${this.id}/items`;
+    console.log('[Detalle] Navegando a:', ruta);
+  // ruta: /dashboard/detalle/:tipo/:id/item  (creación)
+   this.router.navigate([ruta]);
   }
 }

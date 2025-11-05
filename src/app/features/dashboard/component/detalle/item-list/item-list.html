@@ -1,8 +1,8 @@
 <div class="container">
   <h2>Items asociados</h2>
 
-  <div *ngIf="items$ | async as items; else cargandoTpl">
-    <div *ngIf="items.length > 0; else noItemsTpl">
+  <div *ngIf="items$ | async as items; else cargando">
+    <div *ngIf="items.length > 0; else noData">
       <mat-card *ngFor="let item of items" class="item-card">
         <div class="item-header">
           <strong>{{ item.descripcion }}</strong>
@@ -11,7 +11,10 @@
         <div class="item-body">
           <p>Fecha: {{ item.fecha | date }}</p>
         </div>
+
         <div class="acciones">
+          <button mat-raised-button color="primary" (click)="verRegistros(item.id)">Ver Registros</button>
+          <button mat-raised-button color="accent" (click)="nuevoRegistro(item.id)">Añadir registro</button>
           <button mat-button color="primary" (click)="editarItem(item.id)">Editar</button>
           <button mat-button color="warn" (click)="eliminarItem(item.id)">Eliminar</button>
         </div>
@@ -19,13 +22,8 @@
     </div>
   </div>
 
-  <ng-template #noItemsTpl>
-    <p>No hay items asociados.</p>
-  </ng-template>
-
-  <ng-template #cargandoTpl>
-    <p>Cargando items...</p>
-  </ng-template>
+<ng-template #noData><p>No hay items todavía.</p></ng-template> 
+<ng-template #cargando><p>Cargando registros...</p></ng-template>
 
   <button mat-raised-button color="accent" (click)="volver()">Volver al detalle</button>
 </div>
