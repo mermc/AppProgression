@@ -87,6 +87,12 @@ export const routes: Routes = [
     import('./features/dashboard/perfil/perfil').then(m => m.Perfil)
 },
 
+// ESTADISTICAS
+{
+  path: 'dashboard/detalle/:tipo/:id/items/:itemId/registros/estadisticas',
+  loadComponent: () =>
+    import('./features/dashboard/component/detalle/item/registro-stats/registro-stats').then(m => m.RegistroStats)
+},
 
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },

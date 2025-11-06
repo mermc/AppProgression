@@ -55,7 +55,7 @@ export class RegistroForm implements OnInit {
 
     this.form = this.fb.group({
       fecha: [new Date().toISOString().substring(0, 10), Validators.required],
-      observaciones: ['']
+      observaciones: [''],
     });
   }
 

@@ -77,4 +77,13 @@ export class RegistroList implements OnInit {
   // ruta: /dashboard/detalle/:tipo/:id/item  (creación)
    this.router.navigate([ruta]);
   }
+
+
+verEstadisticas() {
+  this.router.navigate([
+    `/dashboard/detalle/${this.tipo}/${this.id}/items/${this.itemId}/estadisticas`
+  ]);
+}
+
+
 }
