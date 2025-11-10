@@ -72,6 +72,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/dashboard/component/detalle/item/registro-form/registro-form').then(m => m.RegistroForm)
   },
+
+  // ESTADISTICAS
+{
+  path: 'dashboard/detalle/:tipo/:id/items/:itemId/registros/estadisticas',
+  loadComponent: () =>
+    import('./features/dashboard/component/detalle/item/registro-stats/registro-stats').then(m => m.RegistroStats)
+},
+
   {
     path: 'dashboard/detalle/:tipo/:id/items/:itemId/registros/:registroId',
     canActivate: [authGuard],
@@ -87,12 +95,6 @@ export const routes: Routes = [
     import('./features/dashboard/perfil/perfil').then(m => m.Perfil)
 },
 
-// ESTADISTICAS
-{
-  path: 'dashboard/detalle/:tipo/:id/items/:itemId/registros/estadisticas',
-  loadComponent: () =>
-    import('./features/dashboard/component/detalle/item/registro-stats/registro-stats').then(m => m.RegistroStats)
-},
 
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },

@@ -1,10 +1,9 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, getDoc } from '@angular/fire/firestore';
 import { Chart, registerables } from 'chart.js';
 import html2canvas from 'html2canvas';
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 Chart.register(...registerables);
@@ -20,6 +19,7 @@ export class RegistroStats implements OnInit {
   tipo!: 'personas' | 'grupos';
   id!: string;
   itemId!: string;
+  itemNombre: string = '';
   chart: any;
 
   constructor(
@@ -28,11 +28,21 @@ export class RegistroStats implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.tipo = this.route.snapshot.paramMap.get('tipo') as 'personas' | 'grupos';
     this.id = this.route.snapshot.paramMap.get('id')!;
     this.itemId = this.route.snapshot.paramMap.get('itemId')!;
 
+    // 1. Obtener nombre del ítem
+    const itemRef = doc(this.firestore, `${this.tipo}/${this.id}/items/${this.itemId}`);
+    const itemSnap = await getDoc(itemRef);
+    if (itemSnap.exists()) {
+      this.itemNombre = itemSnap.data()['descripcion'] || '(Sin nombre)';
+    } else {
+      this.itemNombre = '(Ítem no encontrado)';
+    }
+
+    // 2. Cargar registros del ítem
     const registrosRef = collection(
       this.firestore,
       `${this.tipo}/${this.id}/items/${this.itemId}/registros`
@@ -54,14 +64,13 @@ export class RegistroStats implements OnInit {
         const fechas = registrosOrdenados.map(r =>
           new Date(r.fecha.seconds ? r.fecha.seconds * 1000 : r.fecha).toLocaleDateString()
         );
-        const valores = registrosOrdenados.map((_, index) => index + 1); // valor acumulativo
-
+        const valores = registrosOrdenados.map((_, index) => index + 1);
         this.dibujarGrafico(fechas, valores);
       });
   }
 
   dibujarGrafico(fechas: string[], valores: number[]) {
-    if (this.chart) this.chart.destroy(); // por si se recarga
+    if (this.chart) this.chart.destroy();
 
     const ctx = this.chartCanvas.nativeElement.getContext('2d');
     this.chart = new Chart(ctx, {
@@ -84,7 +93,7 @@ export class RegistroStats implements OnInit {
         responsive: true,
         plugins: {
           legend: { display: true, position: 'top' },
-          title: { display: true, text: 'Progresión en el tiempo' }
+          title: { display: true, text: `Progresión de "${this.itemNombre}"` }
         },
         scales: {
           y: { beginAtZero: true, title: { display: true, text: 'Número de registros' } },
@@ -97,7 +106,7 @@ export class RegistroStats implements OnInit {
   descargarJPEG() {
     html2canvas(this.chartCanvas.nativeElement).then(canvas => {
       const link = document.createElement('a');
-      link.download = 'estadistica_registros.jpeg';
+      link.download = `estadistica_${this.itemNombre || 'item'}.jpeg`;
       link.href = canvas.toDataURL('image/jpeg');
       link.click();
     });
@@ -109,4 +118,3 @@ export class RegistroStats implements OnInit {
     ]);
   }
 }
-

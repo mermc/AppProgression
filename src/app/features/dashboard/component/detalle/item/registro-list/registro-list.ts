@@ -81,7 +81,7 @@ export class RegistroList implements OnInit {
 
 verEstadisticas() {
   this.router.navigate([
-    `/dashboard/detalle/${this.tipo}/${this.id}/items/${this.itemId}/estadisticas`
+    `/dashboard/detalle/${this.tipo}/${this.id}/items/${this.itemId}/registros/estadisticas`
   ]);
 }
 
