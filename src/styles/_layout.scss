@@ -1,0 +1,74 @@
+/* ---------- Header / Toolbar compartido ---------- */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  height: 64px;
+  background: linear-gradient(90deg, var(--brand-100) 0%, var(--brand-300) 100%);
+  color: #03303a;
+  border-bottom: 1px solid rgba(6, 30, 35, 0.04);
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 4px;
+}
+
+.app-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.2px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* ---------- Footer compartido ---------- */
+.app-footer {
+  background: linear-gradient(180deg, rgba(6, 30, 35, 0.02), rgba(6, 30, 35, 0.01));
+  padding: 18px;
+  border-top: 1px solid rgba(6, 30, 35, 0.03);
+  text-align: center;
+  color: rgba(74, 74, 74, 0.65);
+  font-size: 0.9rem;
+}
+
+/* ---------- Contenedor principal ---------- */
+.main-container {
+  padding: 20px;
+  min-height: calc(100vh - 64px - 90px);
+  background: var(--surface);
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 800px) {
+  .toolbar {
+    height: 56px;
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-title {
+    display: none;
+  }
+  .logo {
+    width: 32px;
+    height: 32px;
+  }
+}

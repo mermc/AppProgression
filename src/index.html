@@ -1,15 +1,50 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Progression App</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Progression App</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <!--Header-->
+    <header class="toolbar">
+      <div class="toolbar-left">
+        <img src="assets/logo.jpg" alt="Logo" class="logo">
+        <span class="app-title">Progression App</span>
+      </div>
+      <span class="spacer"></span>
+      <nav>
+        <!-- puedes agregar botones o iconos -->
+        <button mat-icon-button title="Perfil">
+          <span class="material-icons">account_circle</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Contenido dinámico de Angular -->
+    <main class="contenido">
+      <app-root></app-root>
+    </main>
+
+    <!-- Footer global -->
+    <footer class="app-footer">
+      <div class="footer-content">
+        <div class="support">
+          <strong>Progression App</strong><br>
+        </div>
+        <div class="qr">
+          <img src="assets/qr-code.png" alt="Código QR" class="qr-img">
+          <p>Escanéame</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2025 Progression App — Todos los derechos reservados.
+      </div>
+    </footer>
+  </body>
 </html>

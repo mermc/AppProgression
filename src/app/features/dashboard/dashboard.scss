@@ -1,0 +1,135 @@
+/* Ajustes para que la vista LISTA muestre más contenido por item */
+
+/* Base de la card */
+.main-card {
+  padding: 20px;
+  margin-bottom: 90px; /* espacio para FAB + footer */
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+/* ---------- LISTA: más espacio y multilinea ---------- */
+.list-item {
+  padding: 16px;
+  margin: 12px 0;
+  border-radius: 8px;
+  transition: background-color 0.18s, transform 0.08s;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  cursor: pointer;
+  /* permitir que el contenido crezca verticalmente según su contenido */
+  min-height: 72px;
+  overflow: visible; /* asegurar que nada quede recortado */
+}
+
+/* hover suave */
+.list-item:hover {
+  background: rgba(6,30,35,0.03);
+  transform: translateY(-2px);
+}
+
+/* Icono a la izquierda */
+.item-icon {
+  color: var(--brand-300);
+  font-size: 28px;
+  margin-top: 6px;
+  flex: 0 0 auto;
+}
+
+/* Forzamos que el content interno apile las líneas y no recorte */
+.mat-list-item .mat-list-item-content,
+.mat-list-item .mdc-list-item__content,
+.list-item > .mat-list-item-content,
+.list-item > .mdc-list-item__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0; /* importante para truncado correcto */
+  overflow: visible;
+}
+
+/* Primera línea (nombre + apellidos) — permitir wrapping para liberar espacio */
+.item-name {
+  margin: 0;
+  font-weight: 700;
+  color: var(--muted-text);
+  white-space: normal; /* permitir salto de línea en el nombre */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Apellidos al lado del nombre (si hay espacio) */
+.item-surname {
+  font-weight: 600;
+  color: rgba(74,74,74,0.85);
+  margin-left: 8px;
+  white-space: nowrap; /* mantener apellidos en la misma "unidad" si es posible */
+  opacity: 0.95;
+}
+
+/* Observaciones: permitir varias líneas (hasta 4), con ellipsis si es muy largo */
+.item-observacion {
+  margin: 8px 0 0 0;
+  color: rgba(74,74,74,0.72);
+  font-size: 0.92rem;
+  line-height: 1.35;
+
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* WebKit/Chromium/Safari */
+  line-clamp: 4;          /* propiedad estándar de futuro / compatibilidad */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Si quieres que las observaciones se muestren completas en vez de truncarse,
+   sustituye la regla anterior por:
+.item-observacion {
+  margin: 8px 0 0 0;
+  color: rgba(74,74,74,0.72);
+  font-size: 0.92rem;
+  white-space: normal;
+}
+*/
+
+/* ---------- GRID / TARJETAS (sin cambios funcionales) ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.card-item {
+  transition: transform 0.15s ease;
+  border-radius: 10px;
+  padding: 14px;
+  background: var(--card-bg);
+  border: 1px solid rgba(6,30,35,0.03);
+}
+
+.card-item:hover {
+  transform: translateY(-4px);
+}
+
+/* Toggle styling */
+.layout-toggle {
+  background: rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 800px) {
+  .list-item { padding: 12px; min-height: 64px; }
+  .item-name { font-size: 0.98rem; }
+  .card-item { min-height: 110px; padding: 10px; }
+}
+
+@media (max-width: 480px) {
+  .list-item { padding: 10px; }
+  .item-observacion { -webkit-line-clamp: 2; line-clamp: 2; } /* menos líneas en xs */
+}

@@ -1,4 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+/* src/styles.scss - punto de entrada global */
+
+/* 1) tema Material  */
+@import './custom-theme'; 
+
+/*Variables de marca y utilidades */
+@import './_vars';
+
+/* Estilos de diseño compartidos */
+@import './_layout';
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;

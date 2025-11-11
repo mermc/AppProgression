@@ -28,7 +28,7 @@
             ],
             "styles": [
               "src/styles/custom-theme.scss",
-              "src/styles/styles.css"
+              "src/styles/styles.scss"
             ]
           },
           "configurations": {

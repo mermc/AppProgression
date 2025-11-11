@@ -1,82 +1,79 @@
-<!-- Barra de navegación -->
-<mat-toolbar color="primary" class="toolbar">
-  <span class="app-title">Panel General</span>
+<main class="contenido" role="main">
+  <mat-card class="main-card">
+    <div class="card-header" style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+      <div>
+        <h2 *ngIf="vistaActual === 'personas'">Personas</h2>
+        <h2 *ngIf="vistaActual === 'grupos'">Grupos</h2>
+      </div>
 
-  <span class="spacer"></span>
+      <!-- Controles: toggle local + botones Personas/Grupos -->
+      <div style="display:flex; align-items:center; gap:12px;">
+        <mat-button-toggle-group #layoutMode="matButtonToggleGroup" class="layout-toggle" exclusive [value]="'list'">
+          <mat-button-toggle value="list" aria-label="Vista lista">
+            <mat-icon>view_list</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="grid" aria-label="Vista tarjetas">
+            <mat-icon>view_module</mat-icon>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
 
-  <button
-    mat-button
-    (click)="cambiarVista('personas')"
-    [disabled]="vistaActual === 'personas'"
-  >
-    Personas
-  </button>
-  <button
-    mat-button
-    (click)="cambiarVista('grupos')"
-    [disabled]="vistaActual === 'grupos'"
-  >
-    Grupos
-  </button>
+        <button mat-stroked-button color="primary" (click)="cambiarVista('personas')" [disabled]="vistaActual === 'personas'">Personas</button>
+        <button mat-stroked-button color="primary" (click)="cambiarVista('grupos')" [disabled]="vistaActual === 'grupos'">Grupos</button>
+      </div>
+    </div>
 
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>account_circle</mat-icon>
-  </button>
+    <!-- VISTA LISTA -->
+    <!-- Reemplaza solo la sección *ngIf="layoutMode.value === 'list'" por lo siguiente -->
+<section *ngIf="layoutMode.value === 'list'">
+  <mat-list>
+    <mat-list-item
+      *ngFor="let item of (vistaActual === 'personas' ? personas$ : grupos$) | async"
+      (click)="irADetalle(item, vistaActual)"
+      class="clickable-item list-item"
+    >
+      <mat-icon matListIcon class="item-icon">
+        {{ vistaActual === 'personas' ? 'person' : 'group' }}
+      </mat-icon>
 
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="irAPerfil()">Ver Perfil</button>
-    <button mat-menu-item (click)="logout()">Cerrar sesión</button>
-  </mat-menu>
-</mat-toolbar>
+      <!-- Estructura canónica: una línea principal (h4 matLine) y una secundaria (p matLine) -->
+      <h4 matLine class="item-name">
+        {{ item.nombre }}
+        <span *ngIf="vistaActual === 'personas'" class="item-surname"> — {{ item.apellidos }}</span>
+      </h4>
 
-<!-- Contenido principal -->
-<div class="contenido">
-  <mat-card>
-    <h2 *ngIf="vistaActual === 'personas'">Personas</h2>
-    <h2 *ngIf="vistaActual === 'grupos'">Grupos</h2>
+      <p matLine class="item-observacion" *ngIf="item.observaciones">
+        {{ item.observaciones }}
+      </p>
 
-    <!-- Lista dinámica -->
-    <mat-list>
-      <mat-list-item
-        *ngFor="let item of (vistaActual === 'personas' ? personas$ : grupos$) | async"
-        (click)="irADetalle(item, vistaActual)"
-        class="clickable-item"
-      >
-        <mat-icon matListIcon>
-          {{ vistaActual === 'personas' ? 'person' : 'group' }}
-        </mat-icon>
+    </mat-list-item>
+  </mat-list>
+</section>
 
-        <div
-          style="
-            display: grid;
-            grid-template-columns: auto auto 1fr;
-            gap: 8px;
-            align-items: center;
-            width: 100%;
-          "
+    <!-- VISTA GRID / TARJETAS -->
+    <section *ngIf="layoutMode.value === 'grid'">
+      <div class="grid">
+        <mat-card
+          class="card-item clickable-item"
+          *ngFor="let item of (vistaActual === 'personas' ? personas$ : grupos$) | async"
+          (click)="irADetalle(item, vistaActual)"
         >
-          <h4 matLine style="margin: 0;">{{ item.nombre }}</h4>
-          <h4
-            *ngIf="vistaActual === 'personas'"
-            matLine
-            style="margin: 0;"
-          >
-            {{ item.apellidos }}
-          </h4>
-          <h4
-            *ngIf="item.observaciones"
-            matLine
-            style="margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
-          >
-            {{ item.observaciones }}
-          </h4>
-        </div>
-      </mat-list-item>
-    </mat-list>
+          <div class="card-top">
+            <mat-icon class="card-icon" aria-hidden="true">
+              {{ vistaActual === 'personas' ? 'person' : 'group' }}
+            </mat-icon>
+          </div>
+          <div class="card-body">
+            <h3 class="card-name">{{ item.nombre }}</h3>
+            <h4 class="card-surname" *ngIf="vistaActual === 'personas'">{{ item.apellidos }}</h4>
+            <p class="card-observacion" *ngIf="item.observaciones">{{ item.observaciones }}</p>
+          </div>
+        </mat-card>
+      </div>
+    </section>
   </mat-card>
 
   <!-- Botón flotante -->
-  <button mat-fab color="accent" class="add-btn" (click)="crearNuevo()">
+  <button mat-fab color="accent" class="add-btn" (click)="crearNuevo()" aria-label="Crear nuevo">
     <mat-icon>add</mat-icon>
   </button>
-</div>
+</main>
