@@ -8,13 +8,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-nuevo',
   standalone: true,
   templateUrl: './nuevo.html',
-  styleUrls: ['./nuevo.css'],
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule]
+  styleUrls: ['./nuevo.scss'],
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIconModule]
 })
 export class Nuevo implements OnInit {
   tipoSeleccionado: 'persona' | 'grupo' | '' = '';
@@ -79,6 +80,7 @@ export class Nuevo implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['/nuevo']);
+    this.router.navigate(['./dashboard']);
   }
+
 }

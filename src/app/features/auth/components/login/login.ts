@@ -16,7 +16,7 @@ import { FirestoreService } from '../../../../core/services/firestore.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.html',
-  styleUrls: ['./login.css'],
+  styleUrls: ['./login.scss'],
   standalone: true,
   imports: [
     CommonModule,

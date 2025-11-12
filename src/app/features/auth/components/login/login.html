@@ -1,42 +1,57 @@
-<!-- 
-  Tarjeta de Angular Material para el formulario de login 
--->
-<mat-card>
-  <h2>Iniciar sesión</h2>
-  <!-- Formulario de login con Angular forms y Material -->
-  <form #loginForm="ngForm" (ngSubmit)="onLogin()">
-    <!-- Campo para el email. Limpia error al escribir -->
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Email</mat-label>
-      <input matInput type="email" required [(ngModel)]="email" name="email" (ngModelChange)="clearError()">
-    </mat-form-field>
-    <!-- Campo para la contraseña. Limpia error al escribir -->
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Contraseña</mat-label>
-      <input matInput type="password" required [(ngModel)]="password" name="password" (ngModelChange)="clearError()">
-    </mat-form-field>
-    <!-- Botón para enviar el formulario -->
-    <button mat-raised-button color="primary" type="submit">Entrar</button>
-  </form>
+<h1 class="login-title">Hola de nuevo</h1>
+<p class="login-subtitle">Accede a tu cuenta</p>
 
-  <!-- Enlace para ir a la pantalla de registro -->
-  <p>
-    ¿No tienes cuenta?
-    <button mat-button color="accent" (click)="goToRegister()">Registrarme</button>
-  </p>
+<form #loginForm="ngForm" (ngSubmit)="onLogin()" class="form-wrapper">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      type="email"
+      required
+      [(ngModel)]="email"
+      name="email"
+      (ngModelChange)="clearError()"
+    />
+  </mat-form-field>
 
-  <!-- Mensaje si el correo no está verificado -->
-  <p *ngIf="verificationMessage" style="color: red;">
-    {{ verificationMessage }}
-    <!-- Botón para reenviar el correo de verificación -->
-    <!-- Solo se muestra si el correo no está verificado -->
-    <button mat-button color="warn" (click)="resendVerificationEmail()">
-      Reenviar correo de verificación
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Contraseña</mat-label>
+    <input
+      matInput
+      type="password"
+      required
+      [(ngModel)]="password"
+      name="password"
+      (ngModelChange)="clearError()"
+    />
+  </mat-form-field>
+
+  
+
+  <div class="form-actions">
+    <button mat-raised-button class="btn-primary brand-button" type="submit">
+      Inicia sesión
     </button>
-  </p>
+  </div>
+  <div class="form-actions">
+    <button mat-raised-button class="btn-primary brand-button" type="submit">
+      He olvidado mi contraseña
+    </button>
+  </div>
+</form>
 
-  <!-- Mensaje si ocurre un error (credenciales incorrectas, etc.) -->
-  <p *ngIf="errorMessage" style="color: red;">
-    {{ errorMessage }}
-  </p>
-</mat-card>
+<p class="helper-text">
+  ¿No tienes cuenta?
+  <button mat-button class="link-btn" type="button" (click)="goToRegister()">Regístrate aquí</button>
+</p>
+
+<p *ngIf="verificationMessage" class="msg warn">
+  {{ verificationMessage }}
+  <button mat-button class="btn-warn-text" type="button" (click)="resendVerificationEmail()">
+    Reenviar correo de verificación
+  </button>
+</p>
+
+<p *ngIf="errorMessage" class="msg error">
+  {{ errorMessage }}
+</p>

@@ -1,21 +1,31 @@
 
-<div class="container">
-  <h2>Crear nuevo</h2>
-
-  <!-- Selección de tipo -->
-  <div *ngIf="!tipoSeleccionado" class="seleccion">
-    <p>¿Qué deseas crear?</p>
-    <button mat-raised-button color="primary" (click)="seleccionarTipo('persona')">Persona</button>
-    <button mat-raised-button color="accent" (click)="seleccionarTipo('grupo')">Grupo</button>
-    <div class="acciones">
-    <button mat-stroked-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
-    </div>
+<!-- Selección de tipo -->
+<section *ngIf="!tipoSeleccionado" class="selector-wrapper">
+  <p class="section-title-lg">¿Qué deseas crear?</p>
+  <div class="selector-pills">
+    <button mat-button class="pill-btn" (click)="seleccionarTipo('persona')">
+      <mat-icon>person</mat-icon>
+      Persona
+    </button>
+    <button mat-button class="pill-btn" (click)="seleccionarTipo('grupo')">
+      <mat-icon>group</mat-icon>
+      Grupo
+    </button>
   </div>
+  <div class="selector-actions">
+    <button mat-stroked-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+  </div>
+</section>
 
-  <!-- Formulario -->
-  <form *ngIf="tipoSeleccionado" [formGroup]="form" (ngSubmit)="guardar()">
-    <h3>Nuevo {{ tipoSeleccionado }}</h3>
+<!-- Formulario -->
+<form *ngIf="tipoSeleccionado"
+      [formGroup]="form"
+      (ngSubmit)="guardar()"
+      id="nuevoForm"
+      class="form-wrapper">
+  <h3 class="section-title">Nuevo {{ tipoSeleccionado }}</h3>
 
+  <div class="form-grid">
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Nombre</mat-label>
       <input matInput formControlName="nombre" required />
@@ -30,10 +40,10 @@
       <mat-label>Observaciones</mat-label>
       <textarea matInput formControlName="observaciones"></textarea>
     </mat-form-field>
+  </div>
 
-    <div class="acciones">
-      <button mat-stroked-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
-      <button mat-raised-button color="primary" type="submit">Guardar</button>
-    </div>
-  </form>
-</div>
+  <div class="form-actions">
+    <button mat-stroked-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+    <button mat-raised-button color="primary" type="submit">Guardar</button>
+  </div>
+</form>

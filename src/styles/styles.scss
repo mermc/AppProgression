@@ -2,13 +2,13 @@
 /* src/styles.scss - punto de entrada global */
 
 /* 1) tema Material  */
-@import './custom-theme'; 
+@use './custom-theme'; 
 
 /*Variables de marca y utilidades */
-@import './_vars';
+@use './_vars';
 
 /* Estilos de diseño compartidos */
-@import './_layout';
+@use './_layout';
 
 
 html, body { height: 100%; }

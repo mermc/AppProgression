@@ -13,6 +13,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @Component({
@@ -22,20 +23,21 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
   styleUrls: ['./dashboard.scss'],
   imports: [
     CommonModule,
+    FormsModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
     MatCardModule,
     MatListModule,
     MatMenuModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
   ]
 })
 export class Dashboard implements OnInit {
-
   personas$: Observable<any[]>;
   grupos$: Observable<any[]>;
-  vistaActual: 'personas' | 'grupos' = 'personas'; // pestaña activa
+
+  vistaActual: 'personas' | 'grupos' = 'personas';
 
   constructor(
     private firestore: Firestore,
@@ -49,35 +51,33 @@ export class Dashboard implements OnInit {
     this.grupos$ = collectionData(gruposRef, { idField: 'id' });
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  cambiarVista(tipo: 'personas' | 'grupos') {
+  cambiarVista(tipo: 'personas' | 'grupos'): void {
     this.vistaActual = tipo;
   }
 
-  crearNuevo() {
-      console.log('Ir a crear nuevo');
-    this.router.navigate(['/dashboard/nuevo']);
+  crearNuevo(): void {
+    const tipo = this.vistaActual === 'personas' ? 'persona' : 'grupo';
+    this.router.navigate([`/dashboard/nuevo`]);
   }
 
-  irADetalle(item: any, tipo: 'personas' | 'grupos') {
-  console.log('Navegando al detalle:', tipo, item.id);
-  this.router.navigate([`/dashboard/detalle/${tipo}/${item.id}`]);
-}
+  irADetalle(item: any, tipo: 'personas' | 'grupos'): void {
+    this.router.navigate([`/dashboard/detalle/${tipo}/${item.id}`]);
+  }
 
-  irAPerfil() {
+  irAPerfil(): void {
     this.router.navigate(['/dashboard/perfil']);
   }
 
-  async logout() {
-  try {
-    await this.authService.logout();
-    this.router.navigate(['/login']); // desmonta dashboard y perfil
-  } catch (error) {
-    console.error('Error al cerrar sesión:', error);
+  async logout(): Promise<void> {
+    try {
+      await this.authService.logout();
+      this.router.navigate(['/login']);
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+      this.snackBar.open('Error al cerrar sesión', 'Cerrar', { duration: 3000 });
+    }
   }
 }
 
-
-
-}
