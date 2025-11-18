@@ -1,0 +1,35 @@
+<mat-toolbar class="toolbar header-toolbar" role="banner">
+  <div class="toolbar-left">
+    <img src="https://drive.google.com/file/d/1X0_mvxV24Qn8X3DNsy4kb6GG_r7TDkw7/view?usp=sharing" class="logo" />
+    
+    <span class="app-title">Progression App</span>
+  </div>
+
+  <span class="spacer"></span>
+
+  <div class="header-actions" role="navigation" aria-label="User actions">
+    <!-- Perfil (solo icono) -->
+    <button
+      mat-icon-button
+      class="action-btn profile-btn"
+      aria-label="Tu perfil"
+      matTooltip="Tu perfil"
+      (click)="irAPerfil()"
+      title="Tu perfil"
+    >
+      <mat-icon class="header-icon">person_outline</mat-icon>
+    </button>
+
+    <!-- Logout -->
+    <button
+      mat-icon-button
+      class="action-btn logout-btn"
+      aria-label="Cerrar sesión"
+      matTooltip="Cerrar sesión"
+      (click)="logout()"
+      title="Cerrar sesión"
+    >
+      <mat-icon class="header-icon">logout</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

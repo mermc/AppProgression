@@ -1,0 +1,75 @@
+
+.header-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  height: 64px;
+  background: linear-gradient(90deg, var(--brand-100) 0%, var(--brand-300) 100%);
+  color: var(--text-strong);
+  border-bottom: 1px solid rgba(6, 30, 35, 0.04);
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: rgba(255,255,255,0.6);
+  padding: 4px;
+}
+
+.app-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Botones icono */
+.action-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: transparent;
+  transition: background-color 0.15s ease, transform 0.08s ease;
+}
+
+/* Icono grande */
+.header-icon {
+  font-size: 36px !important;
+  width: 36px !important;
+  height: 36px !important;
+  line-height: 36px !important;
+  color: #000 !important;   /* negro sólido para máxima visibilidad */
+}
+
+
+/* Hover/active */
+.action-btn:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-1px);
+}
+
+/* Estilos específicos */
+.profile-btn .header-icon { color: var(--brand-500); }
+.logout-btn .header-icon { color: rgba(74,74,74,0.9); }
+
+@media (max-width: 600px) {
+  .header-icon { font-size: 30px; width: 30px; height: 30px; }
+  .action-btn { width: 42px; height: 42px; }
+  .app-title { display: none; }
+}

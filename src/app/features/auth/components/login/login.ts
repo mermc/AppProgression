@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { sendEmailVerification } from 'firebase/auth';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { CommonModule } from '@angular/common';
 import { FirestoreService } from '../../../../core/services/firestore.service';
 
@@ -81,6 +82,28 @@ export class LoginComponent {
       }
     } else {
       this.errorMessage = 'Necesitas iniciar sesión primero para reenviar el correo de verificación.';
+    }
+  }
+
+  // Nuevo método: enviar email de restablecimiento de contraseña
+  async forgotPassword() {
+    // Limpiar mensajes previos
+    this.errorMessage = '';
+    this.verificationMessage = '';
+
+    if (!this.email) {
+      this.errorMessage = 'Introduce tu correo electrónico para poder enviarte el enlace de restablecimiento.';
+      return;
+    }
+
+    try {
+      const auth = getAuth(); // obtiene la instancia de Auth ya inicializada en la app
+      await sendPasswordResetEmail(auth, this.email);
+      // Reutilizo verificationMessage para mensajes informativos; puedes crear successMessage si prefieres separado
+      this.verificationMessage = 'Correo de restablecimiento enviado. Revisa tu bandeja de entrada y spam.';
+    } catch (err: any) {
+      // Firebase devuelve mensajes que puedes mapear a algo más amigable si quieres
+      this.errorMessage = 'Error al enviar el correo de restablecimiento: ' + (err?.message || err);
     }
   }
 

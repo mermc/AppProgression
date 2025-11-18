@@ -66,18 +66,6 @@ export class Dashboard implements OnInit {
     this.router.navigate([`/dashboard/detalle/${tipo}/${item.id}`]);
   }
 
-  irAPerfil(): void {
-    this.router.navigate(['/dashboard/perfil']);
-  }
-
-  async logout(): Promise<void> {
-    try {
-      await this.authService.logout();
-      this.router.navigate(['/login']);
-    } catch (error) {
-      console.error('Error al cerrar sesión:', error);
-      this.snackBar.open('Error al cerrar sesión', 'Cerrar', { duration: 3000 });
-    }
-  }
+ 
 }
 

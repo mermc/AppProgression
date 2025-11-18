@@ -33,8 +33,16 @@
       Inicia sesión
     </button>
   </div>
+  <!-- Cambiado: type="button" y añade (click) que llama a forgotPassword() -->
   <div class="form-actions">
-    <button mat-raised-button class="btn-primary brand-button" type="submit">
+    <button
+      mat-raised-button
+      class="btn-primary brand-button"
+      type="button"
+      (click)="forgotPassword()"
+      [disabled]="!email"
+      title="Introduce tu correo y pulsa aquí para recibir un email de restablecimiento"
+    >
       He olvidado mi contraseña
     </button>
   </div>

@@ -13,7 +13,7 @@ import { User } from 'firebase/auth';
   selector: 'app-perfil',
   standalone: true,
   templateUrl: './perfil.html',
-  styleUrls: ['./perfil.css'],
+  styleUrls: ['./perfil.scss'],
   imports: [CommonModule, MatCardModule, MatButtonModule]
 })
 export class Perfil implements OnInit, OnDestroy {

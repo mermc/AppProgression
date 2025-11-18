@@ -1,0 +1,30 @@
+.perfil-container {
+  max-width: 520px;
+  margin: 2.4rem auto;
+  padding: 1rem;
+}
+
+mat-card {
+  padding: 1.2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  background: linear-gradient(180deg, #fff 0%, rgba(245,255,254,0.95) 100%);
+  color: var(--text-strong);
+}
+
+.perfil-header {
+  margin-bottom: 8px;
+  h2 { margin: 0; font-size: 1.25rem; }
+}
+
+.perfil-info {
+  margin-top: 12px;
+  p { margin: 8px 0; color: var(--text-muted); }
+}
+
+.acciones {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}

@@ -4,11 +4,13 @@ import { NgFor, AsyncPipe } from '@angular/common';
 import { collection, collectionData, Firestore } from '@angular/fire/firestore';
 import { FirestoreService } from './core/services/firestore.service';
 import { FormsModule } from '@angular/forms';
+import { Header } from './shared/header/header';
+import { Footer } from './shared/footer/footer';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule],
+  imports: [RouterOutlet, FormsModule, Header, Footer],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

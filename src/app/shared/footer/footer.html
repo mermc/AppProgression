@@ -1,0 +1,18 @@
+<!-- Footer global -->
+<footer class="app-footer" role="contentinfo" aria-label="Pie de página de la aplicación">
+  <div class="footer-content">
+    <div class="support">
+      <strong>Progression App</strong><br>
+      <span class="support-sub">Contacto y soporte</span>
+    </div>
+
+    <div class="qr" *ngIf="showQr">
+      <img src="assets/qr-code.png" alt="Código QR" class="qr-img" />
+      <p class="qr-text">Escanéame</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © {{ currentYear }} Progression App — Todos los derechos reservados.
+  </div>
+</footer>
