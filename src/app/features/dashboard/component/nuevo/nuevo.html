@@ -1,4 +1,3 @@
-
 <!-- Selección de tipo -->
 <section *ngIf="!tipoSeleccionado" class="selector-wrapper">
   <p class="section-title-lg">¿Qué deseas crear?</p>
@@ -13,7 +12,7 @@
     </button>
   </div>
   <div class="selector-actions">
-    <button mat-stroked-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+    <button mat-button class="app-btn" (click)="cancelar()">Cancelar</button>
   </div>
 </section>
 
@@ -43,7 +42,7 @@
   </div>
 
   <div class="form-actions">
-    <button mat-stroked-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
-    <button mat-raised-button color="primary" type="submit">Guardar</button>
+    <button mat-button class="app-btn" (click)="cancelar()">Cancelar</button>
+    <button mat-button class="app-btn btn-save" type="submit">Guardar</button>
   </div>
 </form>

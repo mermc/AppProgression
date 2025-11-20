@@ -19,11 +19,11 @@
       </mat-form-field>
 
       <div class="botones">
-        <button mat-raised-button color="primary" (click)="guardarCambios()">Guardar cambios</button>
-        <button mat-raised-button color="accent" (click)="addItem()">Añadir item</button>
-        <button mat-raised-button color="accent" (click)="verItems()">Ver items asociados</button>
-        <button mat-raised-button color="warn" (click)="eliminar()">Eliminar</button>
-        <button mat-raised-button (click)="volver()">Volver</button>
+        <button mat-button class="app-btn btn-save" (click)="guardarCambios()">Guardar</button>
+        <button mat-button class="app-btn" (click)="addItem()">Añadir item</button>
+        <button mat-button class="app-btn" (click)="verItems()">Ver items asociados</button>
+        <button mat-button class="app-btn" (click)="eliminar()">Eliminar</button>
+        <button mat-button class="app-btn" (click)="volver()">Volver</button>
       </div>
     </form>
   </mat-card>

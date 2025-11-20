@@ -1,9 +1,9 @@
 <div class="registro-list">
   <h2>Registros del ítem</h2>
 
-  <button mat-raised-button color="primary" (click)="nuevoRegistro()">Añadir registro</button>
-  <button mat-raised-button color="primary" (click)="cancelar()">Cancelar</button>
-  <button mat-raised-button color="accent"  (click)="verEstadisticas()"> Ver estadísticas </button>
+  <button mat-button class="app-btn" (click)="nuevoRegistro()">Añadir registro</button>
+  <button mat-button class="app-btn" (click)="cancelar()">Cancelar</button>
+  <button mat-button class="app-btn" (click)="verEstadisticas()"> Ver estadísticas </button>
 
 
   <div *ngIf="(registros$ | async) as registros; else cargando">
@@ -14,8 +14,8 @@
         <p><strong>Observaciones:</strong> {{ reg.observaciones }}</p>
         </div>
         <div class="registro-acciones">
-          <button mat-button color="primary" (click)="editarRegistro(reg.id)">Editar</button>
-          <button mat-button color="warn" (click)="eliminarRegistro(reg.id)">Eliminar</button>
+          <button mat-button class="app-btn" (click)="editarRegistro(reg.id)">Editar</button>
+          <button mat-button class="app-btn" (click)="eliminarRegistro(reg.id)">Eliminar</button>
         </div>
         
       </mat-card>

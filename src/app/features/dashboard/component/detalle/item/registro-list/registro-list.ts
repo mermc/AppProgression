@@ -11,7 +11,7 @@ import { MatCard } from "@angular/material/card";
   selector: 'app-registro-list',
   standalone: true,
   templateUrl: './registro-list.html',
-  styleUrls: ['./registro-list.css'],
+  styleUrls: ['./registro-list.scss'],
   imports: [CommonModule, MatButtonModule, MatCard]
 })
 export class RegistroList implements OnInit {

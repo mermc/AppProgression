@@ -13,10 +13,10 @@
         </div>
 
         <div class="acciones">
-          <button mat-raised-button color="primary" (click)="verRegistros(item.id)">Ver Registros</button>
-          <button mat-raised-button color="accent" (click)="nuevoRegistro(item.id)">Añadir registro</button>
-          <button mat-button color="primary" (click)="editarItem(item.id)">Editar</button>
-          <button mat-button color="warn" (click)="eliminarItem(item.id)">Eliminar</button>
+          <button mat-button class="app-btn" (click)="verRegistros(item.id)">Ver Registros</button>
+          <button mat-button class="app-btn" (click)="nuevoRegistro(item.id)">Añadir registro</button>
+          <button mat-button class="app-btn" (click)="editarItem(item.id)">Editar</button>
+          <button mat-button class="app-btn" (click)="eliminarItem(item.id)">Eliminar</button>
         </div>
       </mat-card>
     </div>
@@ -25,5 +25,5 @@
 <ng-template #noData><p>No hay items todavía.</p></ng-template> 
 <ng-template #cargando><p>Cargando registros...</p></ng-template>
 
-  <button mat-raised-button color="accent" (click)="volver()">Volver al detalle</button>
+  <button mat-button class="app-btn" (click)="volver()">Volver al detalle</button>
 </div>

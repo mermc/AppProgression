@@ -1,91 +1,207 @@
+
 .page-header {
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 12px;
-margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 1rem;
 }
 
 .page-title {
-margin: 0;
-font-weight: 700;
-color: var(--muted-text);
+  margin: 0;
+  font-weight: 700;
+  color: var(--muted-text);
 }
 
+/* Shared actions layout */
 .page-actions, .form-actions {
-display: flex;
-align-items: center;
-gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
+/* Selector area */
 .selector-wrapper {
-padding: 12px 0;
+  padding: 12px 0;
 }
 
 .selector-text {
-text-align: center;
-color: rgba(74,74,74,0.75);
-margin-bottom: 12px;
+  text-align: center;
+  color: rgba(74,74,74,0.75);
+  margin-bottom: 12px;
 }
 
 .selector-pills {
-display: flex;
-justify-content: center;
-gap: 10px;
-background: var(--pill-bg);
-border-radius: 10px;
-padding: 6px;
-box-shadow: var(--shadow);
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  background: var(--pill-bg);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: var(--shadow);
 }
+
+/* Botón “Añadir Persona/Grupo” con el mismo estilo que el toggle */
+.add-btn {
+  background: var(--brand-100);
+  color: var(--brand-500);
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 10px 18px;
+  box-shadow: 0 2px 6px rgba(6, 30, 35, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.3s ease;
+
+  mat-icon {
+    font-size: 22px;
+  }
+
+  &:hover {
+    background: var(--brand-300);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(6, 30, 35, 0.15);
+  }
+}
+
+/* Larger pill buttons */
 .pill-btn {
-border-radius: 8px;
-color: var(--pill-fg);
-font-weight: 600;
-display: flex;
-align-items: center;
-gap: 6px;
-padding: 8px 14px;
-transition: 0.25s ease;
+  border-radius: 10px;
+  color: var(--pill-fg);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  transition: 0.18s ease;
+  font-size: 1.05rem; /* larger text */
+  line-height: 1;
+  min-height: 44px;
+}
+
+.pill-btn mat-icon {
+  font-size: 20px;
 }
 
 .pill-btn:hover {
-background: var(--brand-300);
-color: #fff;
+  background: var(--brand-300);
+  color: #fff;
 }
 
+/* Selector actions */
 .selector-actions {
-display: flex;
-justify-content: center;
-margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
 }
 
+/* Section title */
 .section-title-lg {
-font-size: 1.375rem; /* ~22px */
-line-height: 1.35;
-font-weight: 800;
-color: var(--text-strong);
-margin: 0 0 10px 0;
+  font-size: 1.6rem; /* larger (~25.6px) */
+  line-height: 1.2;
+  font-weight: 800;
+  color: var(--text-strong);
+  margin: 0 0 10px 0;
 }
 
+/* Form card */
 .form-wrapper {
-background: var(--card-bg);
-border-radius: 12px;
-box-shadow: var(--shadow);
-padding: 16px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 18px;
+  font-size: 1.02rem; /* base font-size for the form */
+  color: var(--text-strong);
 }
 
+/* Grid */
 .form-grid {
-display: grid;
-grid-template-columns: 1fr;
-gap: 14px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
 }
 
 .full-width {
-width: 100%;
+  width: 100%;
 }
 
-@media (min-width: 720px) {
-.form-grid {
-grid-template-columns: 1fr;
+
+.form-wrapper .mat-form-field {
+  font-size: 1rem;
 }
+
+.form-wrapper .mat-form-field .mat-form-field-flex,
+.form-wrapper .mat-form-field .mat-form-field-infix {
+  padding: 0;
+}
+
+
+.form-wrapper input.mat-input-element,
+.form-wrapper textarea.mat-input-element {
+  font-size: 1.05rem;
+  padding: 10px 12px;
+}
+
+/* Labels slightly larger */
+.form-wrapper .mat-form-field-label {
+  font-size: 0.98rem;
+}
+
+/* Form action buttons — bigger, more touch-friendly */
+.form-actions {
+  margin-top: 14px;
+  justify-content: flex-end;
+}
+
+.form-actions button {
+  padding: 10px 18px;
+  font-size: 1.05rem;
+  min-height: 44px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+/* Specific styling for Cancel button: less rounded (more squared) */
+button.btn-cancel,
+button[mat-stroked-button].btn-cancel {
+  border-radius: 4px !important; /* less rounded */
+  padding: 9px 16px;
+  min-width: 110px;
+}
+
+/* If the Cancel button needs to show the outlined (stroked) appearance */
+button[mat-stroked-button].btn-cancel {
+  background: transparent;
+  border: 1px solid rgba(6,30,35,0.1);
+  color: var(--text-strong);
+}
+
+/* Save / primary button (keep brand colors) */
+button.btn-save,
+button[mat-raised-button].btn-save {
+  background: var(--cta-bg);
+  color: var(--cta-text);
+  border: none;
+}
+
+/* Responsive tweaks */
+@media (min-width: 720px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .selector-pills {
+    gap: 8px;
+    padding: 6px;
+  }
+  .pill-btn {
+    padding: 10px 12px;
+    font-size: 1rem;
+  }
+  .form-actions {
+    justify-content: center;
+  }
 }

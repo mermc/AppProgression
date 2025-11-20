@@ -10,7 +10,7 @@
   },
   "include": [
     "src/**/*.ts"
-  ],
+, "src/app/features/dashboard/component/detalle/item/registro-stats/no-registro-dialog"  ],
   "exclude": [
     "src/**/*.spec.ts"
   ]

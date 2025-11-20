@@ -23,7 +23,7 @@ import { Timestamp } from 'firebase/firestore';
   selector: 'app-item',
   standalone: true,
   templateUrl: './item.html',
-  styleUrls: ['./item.css'],
+  styleUrls: ['./item.scss'],
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -13,7 +13,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
   selector: 'app-detalle',
   standalone: true,
   templateUrl: './detalle.html',
-  styleUrls: ['./detalle.css'],
+  styleUrls: ['./detalle.scss'],
   imports: [
     CommonModule,
     ReactiveFormsModule,

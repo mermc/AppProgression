@@ -19,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'app-registro-form',
   standalone: true,
   templateUrl: './registro-form.html',
-  styleUrls: ['./registro-form.css'],
+  styleUrls: ['./registro-form.scss'],
   imports: [
     CommonModule,
     ReactiveFormsModule,
