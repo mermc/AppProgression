@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { NoRegistrosDialog } from './no-registro-dialog/no-registro-dialog';
 
+
 Chart.register(...registerables);
 
 @Component({

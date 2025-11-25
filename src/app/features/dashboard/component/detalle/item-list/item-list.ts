@@ -7,7 +7,7 @@ import {
   doc,
   deleteDoc
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -43,8 +43,15 @@ export class ItemList implements OnInit {
     this.parentId = this.route.snapshot.paramMap.get('id')!;
 
     const itemsRef = collection(this.firestore, `${this.tipo}/${this.parentId}/items`);
-const q = query(itemsRef, orderBy('fecha', 'desc'));
-this.items$ = collectionData(q, { idField: 'id' });
+  const q = query(itemsRef, orderBy('fecha', 'desc'));
+  this.items$ = collectionData(q, { idField: 'id' }).pipe(
+  map(items =>
+    items.map(item => ({
+      ...item,
+      fecha: item['fecha']?.toDate ? item['fecha'].toDate() : item['fecha']
+    }))
+  )
+);
   }
 
   toggleRegistros(item: any) {

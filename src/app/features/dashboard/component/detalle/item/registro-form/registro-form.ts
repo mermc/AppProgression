@@ -54,7 +54,7 @@ export class RegistroForm implements OnInit {
     this.itemId = this.route.snapshot.paramMap.get('itemId')!;
 
     this.form = this.fb.group({
-      fecha: [new Date().toISOString().substring(0, 10), Validators.required],
+      fecha: [new Date(), Validators.required],
       observaciones: [''],
     });
   }

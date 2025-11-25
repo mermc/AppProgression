@@ -110,7 +110,7 @@ export class Item implements OnInit {
       }
 
       // volver al detalle del padre
-      this.router.navigate([`/dashboard/detalle/${this.parentTipo}/${this.parentId}`]);
+      this.router.navigate([`/dashboard/detalle/${this.parentTipo}/${this.parentId}/items`]);
     } catch (err) {
       console.error(err);
       this.snackBar.open('Error al guardar el item', 'Cerrar', { duration: 3000 });
