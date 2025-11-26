@@ -41,11 +41,12 @@ export class ItemList implements OnInit {
   ngOnInit() {
     this.tipo = this.route.snapshot.paramMap.get('tipo') as 'personas' | 'grupos';
     this.parentId = this.route.snapshot.paramMap.get('id')!;
+    this.id = this.route.snapshot.paramMap.get('id')!;
 
     const itemsRef = collection(this.firestore, `${this.tipo}/${this.parentId}/items`);
-  const q = query(itemsRef, orderBy('fecha', 'desc'));
-  this.items$ = collectionData(q, { idField: 'id' }).pipe(
-  map(items =>
+    const q = query(itemsRef, orderBy('fecha', 'desc'));
+    this.items$ = collectionData(q, { idField: 'id' }).pipe(
+    map(items =>
     items.map(item => ({
       ...item,
       fecha: item['fecha']?.toDate ? item['fecha'].toDate() : item['fecha']
@@ -53,6 +54,26 @@ export class ItemList implements OnInit {
   )
 );
   }
+
+
+  addItem() {
+    console.log('[Detalle] Entrando en addItem()');
+  console.log('[Detalle] Tipo actual:', this.tipo);
+  console.log('[Detalle] ID actual:', this.id);
+  // navegamos a la ruta para crear item del padre actual
+  if (!this.tipo || !this.id) {
+    this.snackBar.open('No se puede añadir item: faltan parámetros', 'Cerrar', { duration: 2000 });
+    return;
+  }
+  const url = this.router.createUrlTree([`/dashboard/detalle/${this.tipo}/${this.id}/items`]).toString();
+  console.log('[Detalle] URL generada con createUrlTree():', url);
+  
+  const ruta = `/dashboard/detalle/${this.tipo}/${this.id}/items/nuevo`;
+   console.log('[Detalle] Navegando a:', ruta);
+  // ruta: /dashboard/detalle/:tipo/:id/item  (creación)
+  this.router.navigate([ruta]);
+ 
+}
 
   toggleRegistros(item: any) {
     item.showRegistros = !item.showRegistros;
@@ -79,6 +100,7 @@ export class ItemList implements OnInit {
       this.snackBar.open('Error al eliminar el item', 'Cerrar', { duration: 2000 });
     }
   }
+
 
 
   verRegistros(itemId: string) {
