@@ -82,9 +82,9 @@
 
 /* ---------- Grid ---------- */
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 18px;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 18px;
 }
 
 .card-item {

@@ -57,7 +57,34 @@ app-root {
   box-sizing: border-box;
 }
 
+.logo-badge {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+width: 120px; 
+height: 120px;
+padding: 8px;
+border-radius: 16px;
+background: var(--brand-100);
+box-shadow: 0 3px 10px #061e231a;
+}
+.auth-logo {
+display: block;
+width: 100%;
+height: auto; 
+object-fit: contain;
+}
+
 /* ---------- Responsivo ---------- */
+@media (max-width: 520px) {
+.logo-badge { 
+width: 88px;
+height: 88px;
+padding: 6px;
+border-radius: 12px;
+}
+}
+
 @media (max-width: 800px) {
   .toolbar { height: 56px; padding: 0 12px; }
 }

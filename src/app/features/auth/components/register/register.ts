@@ -16,7 +16,7 @@ import { sendEmailVerification } from 'firebase/auth';
 @Component({
   selector: 'app-register',
   templateUrl: './register.html',
-  styleUrls: ['./register.css'],
+  styleUrls: ['./register.scss'],
   standalone: true,
   imports: [
     MatCardModule,
@@ -65,7 +65,7 @@ export class RegisterComponent {
     } catch (err: any) {
       console.error('Error durante el registro:', err);
 
-      // Puedes refinar los mensajes de error para el usuario
+      // Si ya existe el email, mostrar mensaje específico
       if (err.code === 'auth/email-already-in-use') {
         alert('Este correo electrónico ya está registrado. Intenta iniciar sesión o usa otro correo.');
       } else {
@@ -75,6 +75,10 @@ export class RegisterComponent {
 
     }
 
+  }
+
+  cancelar() {
+    this.router.navigate(['/login']);
   }
 
 }

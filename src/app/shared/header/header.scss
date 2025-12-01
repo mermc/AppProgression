@@ -15,6 +15,21 @@
   gap: 12px;
 }
 
+.header-badge {
+width: 36px;
+height: 36px;
+padding: 4px;
+border-radius: 6px;
+background: rgba(255, 255, 255, 0.6);
+}
+
+.header-badge .auth-logo {
+width: 100%;
+height: auto;
+display: block;
+object-fit: contain;
+}
+
 .logo {
   width: 36px;
   height: 36px;
@@ -67,6 +82,10 @@
 /* Estilos específicos */
 .profile-btn .header-icon { color: var(--brand-500); }
 .logout-btn .header-icon { color: rgba(74,74,74,0.9); }
+
+@media (max-width: 600px) {
+.header-badge { width: 32px; height: 32px; padding: 3px; border-radius: 6px; }
+}
 
 @media (max-width: 600px) {
   .header-icon { font-size: 30px; width: 30px; height: 30px; }

@@ -1,5 +1,5 @@
 /* --------------------------------------------
-   SHARED APP BUTTON STYLE (GLOBAL REUSABLE)
+ BOTONES COMUNES 
 --------------------------------------------- */
 
 .app-btn {
@@ -17,7 +17,7 @@
   transition: 0.3s ease;
   text-decoration: none;
 
-  /* For Angular Material icon */
+  /* Angular Material */
   mat-icon {
     font-size: 22px;
   }
@@ -34,7 +34,6 @@
   }
 }
 
-/* Optional variants (if you want later)
 .app-btn--small { padding: 6px 12px; font-size: 0.85rem; }
 .app-btn--large { padding: 14px 22px; font-size: 1.1rem; }
-*/
+

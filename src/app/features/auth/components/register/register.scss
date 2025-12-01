@@ -1,0 +1,117 @@
+/* Centering container */
+.auth-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 64px - 90px);
+  padding: 20px;
+}
+
+/* Card similar to Login */
+.auth-card {
+  width: 100%;
+  max-width: 520px;
+  padding: 28px 26px 26px;
+  border-radius: 16px;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+/* Typography aligned with Login page */
+.auth-title {
+  margin: 8px 0 4px 0;
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--text-strong);
+}
+
+.auth-subtitle {
+  text-align: center;
+  margin: 0 0 16px 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* Form layout */
+.auth-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Primary CTA*/
+.auth-btn-primary {
+  width: 100%;
+  justify-content: center;
+  background: var(--cta-blue) !important;
+  color: #fff !important;
+  padding: 10px 18px;
+  font-size: 1rem;
+  border-radius: 10px;
+  transition: 0.25s ease;
+
+  &:hover:not(:disabled) {
+    background: var(--cta-blue-hover) !important;
+    box-shadow: 0 4px 10px rgba(20, 91, 143, 0.25);
+  }
+}
+
+.auth-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* Secondary button (smaller & outlined) */
+  .auth-btn-secondary {
+  color: #333 !important;          // neutral dark gray
+  border-color: #999 !important;   // clean gray border
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+}
+
+/* Keep the rest of your responsive design */
+.full-width {
+  width: 100%;
+}
+
+/* Helpers */
+.auth-helper-text {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+/* Text link */
+.auth-link-btn {
+  color: var(--cta-blue);
+  font-weight: 700;
+  border-radius: 8px;
+
+  &:hover {
+    background: rgba(20, 91, 143, 0.08);
+  }
+}
+
+/* Responsiveness */
+@media (max-width: 520px) {
+  .auth-card {
+    margin: 0 12px;
+    padding: 24px;
+  }
+
+  .auth-title {
+    font-size: 1.45rem;
+  }
+}
+

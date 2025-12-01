@@ -1,65 +1,74 @@
-<h1 class="login-title">Hola de nuevo</h1>
-<p class="login-subtitle">Accede a tu cuenta</p>
+<div class="auth-container">
+  <div class="auth-card">
 
-<form #loginForm="ngForm" (ngSubmit)="onLogin()" class="form-wrapper">
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Email</mat-label>
-    <input
-      matInput
-      type="email"
-      required
-      [(ngModel)]="email"
-      name="email"
-      (ngModelChange)="clearError()"
-    />
-  </mat-form-field>
+    <div class="auth-header"> 
+      <div class="logo-badge"> <img src="assets/progressionapp.png" alt="Logo" class="auth-logo" /> 
+      </div> 
+    </div>
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Contraseña</mat-label>
-    <input
-      matInput
-      type="password"
-      required
-      [(ngModel)]="password"
-      name="password"
-      (ngModelChange)="clearError()"
-    />
-  </mat-form-field>
+    <form #loginForm="ngForm" (ngSubmit)="onLogin()" class="auth-form">
 
-  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          required
+          [(ngModel)]="email"
+          name="email"
+          (ngModelChange)="clearError()"
+        />
+      </mat-form-field>
 
-  <div class="form-actions">
-    <button mat-raised-button class="btn-primary brand-button" type="submit">
-      Inicia sesión
-    </button>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input
+          matInput
+          type="password"
+          required
+          [(ngModel)]="password"
+          name="password"
+          (ngModelChange)="clearError()"
+        />
+      </mat-form-field>
+
+      <button type="submit" class="app-btn auth-btn-primary">
+        Inicia sesión
+      </button>
+
+      <button
+        type="button"
+        class="app-btn app-btn--small auth-btn-secondary"
+        (click)="forgotPassword()"
+        [disabled]="!email"
+        title="Introduce tu correo para restablecer tu contraseña"
+      >
+        He olvidado mi contraseña
+      </button>
+
+      <p class="auth-subtitle">
+        ¿No tienes cuenta?
+        <button type="button" class="app-btn auth-btn-primary" (click)="goToRegister()">
+          Regístrate aquí
+        </button>
+      </p>
+
+      <p *ngIf="verificationMessage" class="auth-msg warn">
+        {{ verificationMessage }}
+        <button
+          mat-button
+          class="auth-link-warn"
+          type="button"
+          (click)="resendVerificationEmail()"
+        >
+          Reenviar correo
+        </button>
+      </p>
+
+      <p *ngIf="errorMessage" class="auth-msg error">
+        {{ errorMessage }}
+      </p>
+
+    </form>
   </div>
-  <!-- Cambiado: type="button" y añade (click) que llama a forgotPassword() -->
-  <div class="form-actions">
-    <button
-      mat-raised-button
-      class="btn-primary brand-button"
-      type="button"
-      (click)="forgotPassword()"
-      [disabled]="!email"
-      title="Introduce tu correo y pulsa aquí para recibir un email de restablecimiento"
-    >
-      He olvidado mi contraseña
-    </button>
-  </div>
-</form>
-
-<p class="helper-text">
-  ¿No tienes cuenta?
-  <button mat-button class="link-btn" type="button" (click)="goToRegister()">Regístrate aquí</button>
-</p>
-
-<p *ngIf="verificationMessage" class="msg warn">
-  {{ verificationMessage }}
-  <button mat-button class="btn-warn-text" type="button" (click)="resendVerificationEmail()">
-    Reenviar correo de verificación
-  </button>
-</p>
-
-<p *ngIf="errorMessage" class="msg error">
-  {{ errorMessage }}
-</p>
+</div>
