@@ -12,7 +12,7 @@
     </button>
   </div>
   <div class="selector-actions">
-    <button mat-button class="app-btn" (click)="cancelar()">Cancelar</button>
+    <button mat-button class="app-btn btn-cancel" (click)="cancelar()">Cancelar</button>
   </div>
 </section>
 
@@ -22,7 +22,6 @@
       (ngSubmit)="guardar()"
       id="nuevoForm"
       class="form-wrapper">
-  <h3 class="section-title">{{ tipoSeleccionado }}</h3>
 
   <div class="form-grid">
     <mat-form-field appearance="outline" class="full-width">
@@ -42,7 +41,7 @@
   </div>
 
   <div class="form-actions">
-    <button mat-button class="app-btn" (click)="cancelar()">Cancelar</button>
+    <button mat-button class="app-btn btn-cancel" (click)="cancelar()">Cancelar</button>
     <button mat-button class="app-btn btn-save" type="submit">Guardar</button>
   </div>
 </form>

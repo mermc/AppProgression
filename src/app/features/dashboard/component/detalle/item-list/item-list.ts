@@ -21,7 +21,7 @@ import { RegistroList } from '../item/registro-list/registro-list';
   selector: 'app-itemlist',
   standalone: true,
   templateUrl: './item-list.html',
-  styleUrls: ['./item-list.css'],
+  styleUrls: ['./item-list.scss'],
   imports: [CommonModule, MatButtonModule, MatCardModule]
 })
 export class ItemList implements OnInit {

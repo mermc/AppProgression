@@ -1,30 +1,189 @@
+/* detalle.scss
+   Adjusted button colors and focus behavior so:
+   - button text is dark (var(--text-strong)) for readability (or brand blue where appropriate)
+   - "Guardar" remains a filled CTA but does not stay visually "selected" after click
+   - keyboard focus still shows an accessible focus ring via :focus-visible
+   - responsive and other visual rules unchanged
+*/
+
+/* Container: center the card and give comfortable page padding */
 .detalle-container {
   display: flex;
   justify-content: center;
-  padding: 2rem;
+  padding: 2.5rem 1.25rem;
+  background: var(--surface);
+  box-sizing: border-box;
 }
 
+/* Card: match global card style */
 mat-card {
-  max-width: 600px;
   width: 100%;
-  padding: 2rem;
+  max-width: 720px;
+  padding: 1.5rem 1.75rem;
+  border-radius: 14px;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  box-sizing: border-box;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(6,30,35,0.08);
+  }
 }
 
-.campo {
-  display: block;
-  width: 100%;
-  margin-bottom: 1rem;
+/* Title */
+mat-card > h2 {
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.1rem, 2.4vw, 1.35rem);
+  color: var(--text-strong);
+  font-weight: 800;
 }
 
+/* Field wrapper: ensure full width and spacing */
+.campo { display: block; width: 100%; margin-bottom: 1rem; }
+
+/* Material form fields: larger inputs and labels */
+mat-form-field { width: 100%; }
+mat-form-field .mat-form-field-infix { padding: 0; }
+
+/* Increase input and textarea tap target and font-size */
+.mat-input-element {
+  font-size: clamp(1rem, 1.6vw, 1.05rem);
+  padding: 12px 12px !important;
+}
+
+/* Labels: darker and slightly larger */
+.mat-form-field-label {
+  color: var(--text-strong);
+  font-weight: 600;
+  font-size: clamp(0.95rem, 1.6vw, 1rem);
+}
+
+/* Buttons row: use global app-btn sizing, wrap when needed */
 .botones {
+  margin-top: 1.25rem;
   display: flex;
-  justify-content: space-between;
+  gap: 0.75rem;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  align-items: center;
 }
 
+/* Default buttons inside .botones: use dark text for readability */
+.botones .app-btn,
+.botones button.mat-button,
+.botones button.mat-flat-button,
+.botones button.mat-stroked-button,
+.botones a.app-btn {
+  color: var(--text-strong) !important;       /* darker text by default */
+  background: transparent !important;
+  border: 1px solid rgba(6,30,35,0.04);
+  padding: 10px 14px;
+  font-size: clamp(0.95rem, 1.4vw, 1rem);
+  min-height: 44px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(6,30,35,0.06);
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* Make icons match text color */
+.botones .app-btn mat-icon,
+.botones button.mat-button mat-icon,
+.botones button.mat-stroked-button mat-icon {
+  color: var(--text-strong) !important;
+}
+
+/* Primary action (Guardar) - filled CTA */
+.botones .btn-save,
+.botones button.btn-save {
+  background: var(--cta-bg) !important;
+  color: var(--cta-text) !important;
+  box-shadow: 0 6px 14px rgba(12,192,223,0.12);
+  border: none !important;
+}
+
+/* Hover: brand background + white text */
+.botones .app-btn:hover,
+.botones button.mat-button:hover,
+.botones button.mat-stroked-button:hover,
+.botones a.app-btn:hover,
+.botones button.btn-save:hover {
+  background: var(--brand-300) !important;
+  color: var(--cta-text) !important;
+  border-color: var(--brand-300) !important;
+  box-shadow: 0 6px 14px rgba(6,30,35,0.08);
+}
+
+/* If some buttons were rendered with color="warn" or mat-warn, force neutral/brand text */
+.botones button.mat-stroked-button.mat-warn,
+.botones button.mat-stroked-button[color="warn"],
+.botones button.mat-button.mat-warn,
+.botones button.mat-button[color="warn"] {
+  color: var(--text-strong) !important;
+  border-color: rgba(6,30,35,0.04) !important;
+  background: transparent !important;
+}
+
+/* Accessibility: keyboard focus shows visible ring, but mouse focus (click) won't keep the strong outline.
+   Use focus-visible for keyboard, and remove the visual hold for non-keyboard focus.
+*/
+.botones .app-btn:focus:not(:focus-visible),
+.botones button:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Keyboard users still get a visible focus ring */
+.botones .app-btn:focus-visible,
+.botones button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(12,192,223,0.10) !important;
+  border-radius: 8px;
+}
+
+/* Special case: Angular Material may add persistent classes; ensure "pressed" state doesn't stay visually.
+   Remove any leftover "mat-focus-indicator" focus style that keeps button filled after click. */
+.botones .mat-focus-indicator.mat-button:active,
+.botones .mat-focus-indicator.mat-button.mat-focused,
+.botones .mat-focus-indicator.mat-button.mat-active {
+  /* neutralize persistent active/focus styles */
+  background: transparent !important;
+  box-shadow: 0 2px 8px rgba(6,30,35,0.06) !important;
+  color: var(--text-strong) !important;
+}
+
+/* But keep btn-save filled even when focused (unless keyboard focus-visible should show ring only) */
+.botones .btn-save:focus,
+.botones .btn-save:active {
+  background: var(--cta-bg) !important;
+  color: var(--cta-text) !important;
+  box-shadow: 0 6px 14px rgba(12,192,223,0.12) !important;
+}
+
+/* Loading state */
 .cargando {
   text-align: center;
   padding: 3rem;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  color: var(--text-muted);
+}
+
+/* Responsive behavior */
+@media (max-width: 880px) {
+  .detalle-container { padding: 1.25rem 12px; }
+  mat-card { padding: 1.1rem 1.25rem; max-width: 720px; }
+  .botones { justify-content: center; }
+  .botones .app-btn { padding: 10px 12px; }
+}
+
+/* Very small screens: make buttons full-width for easier tapping */
+@media (max-width: 420px) {
+  mat-card { padding: 1rem; border-radius: 12px; }
+  .botones { gap: 0.5rem; }
+  .botones .app-btn {
+    flex: 1 1 100%;
+    width: 100%;
+    text-align: center;
+    min-width: 0;
+  }
 }

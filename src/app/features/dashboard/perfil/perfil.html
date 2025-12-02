@@ -1,13 +1,15 @@
 <div class="perfil-container">
   <mat-card *ngIf="perfil; else cargando">
-    <h2>Perfil de usuario</h2>
+    <h1>Perfil de usuario</h1>
     <p><strong>Nombre:</strong> {{ perfil.nombre || 'Sin nombre' }}</p>
     <p><strong>Apellidos:</strong> {{ perfil.apellidos || 'Sin apellidos' }}</p>
     <p><strong>Correo:</strong> {{ perfil.email }}</p>
 
 
     <div class="acciones">
-      <button mat-raised-button color="primary" (click)="volver()">Volver al Dashboard</button>
+      <button mat-button class="app-btn" (click)="volver()" aria-label="Volver al Dashboard">
+        Volver al Dashboard
+      </button>
     </div>
   </mat-card>
 

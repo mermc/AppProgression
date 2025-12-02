@@ -1,7 +1,19 @@
 <mat-toolbar class="toolbar header-toolbar" role="banner">
   <div class="toolbar-left">
-    <div class="logo-badge header-badge"> <img src="assets/progressionapp.png" alt="Logo" class="auth-logo" /> </div>
-    <span class="app-title">Progression App</span>
+    <div
+      class="brand-link"
+      role="link"
+      tabindex="0"
+      title="Ir al panel"
+      aria-label="Ir al panel"
+      (click)="goToDashboard()"
+      (keydown.enter)="goToDashboard()"
+    >
+      <div class="logo-badge header-badge">
+        <img src="assets/progressionapp.png" alt="Logo" class="auth-logo" />
+      </div>
+      <span class="app-title">Progression App</span>
+    </div>
   </div>
 
   <span class="spacer"></span>

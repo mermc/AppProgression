@@ -2,12 +2,18 @@
  BOTONES COMUNES 
 --------------------------------------------- */
 
+:root {
+  --btn-radius: 22px; 
+  --btn-padding-y: 10px;
+  --btn-padding-x: 18px;
+}
+
 .app-btn {
   background: var(--brand-100);
-  color: var(--brand-500);
+  color: var(--text-strong);
   font-weight: 600;
-  border-radius: 10px;
-  padding: 10px 18px;
+  border-radius: var(--btn-radius);
+  padding: var(--btn-padding-y) var(--btn-padding-x);
   box-shadow: 0 2px 6px rgba(6, 30, 35, 0.08);
   display: inline-flex;
   align-items: center;
@@ -20,6 +26,7 @@
   /* Angular Material */
   mat-icon {
     font-size: 22px;
+    color: inherit;
   }
 
   &:hover {
@@ -34,6 +41,52 @@
   }
 }
 
-.app-btn--small { padding: 6px 12px; font-size: 0.85rem; }
-.app-btn--large { padding: 14px 22px; font-size: 1.1rem; }
+/* Button como toggle (preserve its pill shape and slightly different styling) */
+.add-btn {
+  background: var(--brand-100) !important;
+  color: var(--text-strong) !important;
+  font-weight: 600;
+  border-radius: calc(var(--btn-radius) + 0px);
+  padding: 10px 26px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.25s ease;
+  border: none !important;
+  box-shadow: 0 2px 6px rgba(6, 30, 35, 0.08);
 
+  /* Force Material button base */
+  &.mat-button { background: var(--brand-100) !important; color: var(--text-strong) !important; }
+
+  mat-icon { font-size: 20px; color: inherit !important; }
+
+  &:hover {
+    background: var(--brand-300) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 10px rgba(6, 30, 35, 0.15);
+  }
+}
+
+/* Pill / large CTA */
+.pill-btn {
+  background: var(--brand-100);
+  color: var(--brand-500);
+  font-weight: 700;
+  border-radius: var(--btn-radius);
+  padding: 12px 22px;
+  min-height: 48px;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 6px rgba(6, 30, 35, 0.08);
+  transition: 0.25s ease;
+
+  mat-icon { font-size: 22px; }
+
+  &:hover { background: var(--brand-300); color: #fff; box-shadow: 0 4px 10px rgba(6, 30, 35, 0.15); }
+
+  &:active { transform: scale(0.97); }
+}
+.app-btn--small { padding: 6px 12px; font-size: 0.85rem; border-radius: 12px; }
+.app-btn--large { padding: 14px 22px; font-size: 1.1rem; }

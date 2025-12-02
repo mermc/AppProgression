@@ -1,4 +1,5 @@
 
+/* Page header and title */
 .page-header {
   display: flex;
   align-items: center;
@@ -14,95 +15,93 @@
 }
 
 /* Shared actions layout */
-.page-actions, .form-actions {
+.page-actions,
+.form-actions {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-/* Selector area */
+/* Selector area (centered) */
 .selector-wrapper {
   padding: 12px 0;
+  text-align: center;
 }
 
+/* helper text */
 .selector-text {
   text-align: center;
-  color: rgba(74,74,74,0.75);
+  color: rgba(74, 74, 74, 0.75);
   margin-bottom: 12px;
 }
 
+/* Pill selector: use same visual scale as global .pill-btn but scoped tweaks */
 .selector-pills {
   display: flex;
   justify-content: center;
   gap: 12px;
   background: var(--pill-bg);
   border-radius: 12px;
-  padding: 8px;
+  padding: 10px; /* slightly larger padding to match bigger controls */
   box-shadow: var(--shadow);
 }
 
-/* Botón “Añadir Persona/Grupo” con el mismo estilo que el toggle */
-.add-btn {
+/* Individual pill button (keeps your .pill-btn contract but increases size & contrast) */
+.pill-btn {
   background: var(--brand-100);
-  color: var(--brand-500);
-  font-weight: 600;
-  border-radius: 10px;
-  padding: 10px 18px;
-  box-shadow: 0 2px 6px rgba(6, 30, 35, 0.08);
+  color: var(--text-strong); /* default to dark readable color */
+  font-weight: 700;
+  border-radius: 14px;
+  padding: 12px 26px;
+  min-height: 48px;
+  font-size: clamp(1rem, 1.8vw, 1.25rem); /* scalable font-size */
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: 0.3s ease;
-
-  mat-icon {
-    font-size: 22px;
-  }
-
-  &:hover {
-    background: var(--brand-300);
-    color: #fff;
-    box-shadow: 0 4px 10px rgba(6, 30, 35, 0.15);
-  }
+  gap: 10px;
+  box-shadow: 0 2px 6px rgba(6, 30, 35, 0.08);
+  transition: 0.18s ease;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
 }
 
-/* Larger pill buttons */
-.pill-btn {
-  border-radius: 10px;
-  color: var(--pill-fg);
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  transition: 0.18s ease;
-  font-size: 1.05rem; /* larger text */
-  line-height: 1;
-  min-height: 44px;
+/* Higher specificity rules to override Angular Material color attributes (e.g. color="warn") */
+.pill-btn.mat-button,
+.pill-btn[mat-button],
+.pill-btn.mat-button .mat-button-wrapper,
+.pill-btn[mat-button] .mat-button-wrapper {
+  color: var(--text-strong) !important;
 }
 
 .pill-btn mat-icon {
   font-size: 20px;
+  color: var(--text-strong) !important;
 }
 
-.pill-btn:hover {
+/* Hover / active keep original behavior (text -> white) */
+.pill-btn:hover,
+.pill-btn:active {
   background: var(--brand-300);
-  color: #fff;
+  color: #fff !important;
+  box-shadow: 0 4px 10px rgba(6, 30, 35, 0.15);
 }
 
-/* Selector actions */
+/* Selector actions (Cancel under pills) */
 .selector-actions {
   display: flex;
   justify-content: center;
   margin-top: 14px;
 }
 
-/* Section title */
+/* Section title  */
 .section-title-lg {
-  font-size: 1.6rem; /* larger (~25.6px) */
-  line-height: 1.2;
+  font-size: clamp(1.4rem, 2.8vw, 1.8rem);
+  line-height: 1.15;
   font-weight: 800;
   color: var(--text-strong);
-  margin: 0 0 10px 0;
+  margin: 0 0 14px 0;
+  text-align: center;
+  width: 100%;
 }
 
 /* Form card */
@@ -110,8 +109,8 @@
   background: var(--card-bg);
   border-radius: 12px;
   box-shadow: var(--shadow);
-  padding: 18px;
-  font-size: 1.02rem; /* base font-size for the form */
+  padding: 20px;
+  font-size: clamp(1rem, 1.6vw, 1.05rem); /* base font-size for the form */
   color: var(--text-strong);
 }
 
@@ -139,69 +138,85 @@
 
 .form-wrapper input.mat-input-element,
 .form-wrapper textarea.mat-input-element {
-  font-size: 1.05rem;
-  padding: 10px 12px;
+  font-size: clamp(1rem, 1.6vw, 1.05rem);
+  padding: 12px 14px;
 }
 
-/* Labels slightly larger */
+/* Labels*/
 .form-wrapper .mat-form-field-label {
-  font-size: 0.98rem;
+  font-size: 1rem;
+  color: var(--text-strong);
+  font-weight: 600;
 }
 
-/* Form action buttons — bigger, more touch-friendly */
+/* Form action buttons*/
 .form-actions {
-  margin-top: 14px;
+  margin-top: 18px;
   justify-content: flex-end;
 }
 
 .form-actions button {
-  padding: 10px 18px;
-  font-size: 1.05rem;
-  min-height: 44px;
-  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: clamp(1rem, 1.6vw, 1.05rem);
+  min-height: 48px;
+  border-radius: 10px;
   font-weight: 700;
+  cursor: pointer;
+  border: none;
 }
 
-/* Specific styling for Cancel button: less rounded (more squared) */
+/* Cancel button*/
 button.btn-cancel,
 button[mat-stroked-button].btn-cancel {
-  border-radius: 4px !important; /* less rounded */
-  padding: 9px 16px;
-  min-width: 110px;
-}
-
-/* If the Cancel button needs to show the outlined (stroked) appearance */
-button[mat-stroked-button].btn-cancel {
+  border-radius: 6px !important; 
+  padding: 10px 18px;
+  min-width: 120px;
   background: transparent;
-  border: 1px solid rgba(6,30,35,0.1);
   color: var(--text-strong);
+  border: 1px solid rgba(6, 30, 35, 0.08);
+  box-shadow: none;
 }
 
-/* Save / primary button (keep brand colors) */
+button.btn-cancel:hover {
+  background: rgba(6, 30, 35, 0.03);
+}
+
+/* Save button */
 button.btn-save,
 button[mat-raised-button].btn-save {
   background: var(--cta-bg);
   color: var(--cta-text);
   border: none;
+  box-shadow: 0 4px 10px rgba(12,192,223,0.12);
 }
 
-/* Responsive tweaks */
+button.btn-save:hover,
+button[mat-raised-button].btn-save:hover {
+  background: var(--cta-bg-hover);
+}
+
+/* Responsive*/
 @media (min-width: 720px) {
   .form-grid {
     grid-template-columns: 1fr;
   }
 }
 
+/* responsive */
 @media (max-width: 700px) {
-  .selector-pills {
-    gap: 8px;
-    padding: 6px;
-  }
   .pill-btn {
-    padding: 10px 12px;
-    font-size: 1rem;
+    font-size: 1.05rem;
+    padding: 10px 18px;
+    min-height: 48px;
+    gap: 8px;
   }
-  .form-actions {
-    justify-content: center;
+
+  .pill-btn mat-icon {
+    font-size: 18px;
   }
+
+  .section-title-lg { font-size: 1.4rem; }
+  .form-wrapper { padding: 16px; }
+  .form-actions { justify-content: center; gap: 12px; }
+  .form-actions button { min-width: 110px; }
 }

@@ -28,3 +28,25 @@ mat-card {
   justify-content: center;
   gap: 12px;
 }
+
+.perfil-container .acciones > button.app-btn,
+.perfil-container .acciones > button.mat-mdc-button.app-btn,
+.perfil-container .acciones > button.mat-mdc-button.app-btn .mdc-button__label {
+  background: var(--brand-100) !important;
+  color: var(--text-strong) !important;
+  padding: 12px 22px !important;
+  border-radius: var(--btn-radius, 22px) !important;
+  min-height: 44px !important;
+  font-weight: 600 !important;
+  font-size: clamp(0.98rem, 1.6vw, 1.05rem) !important;
+  border: 1px solid rgba(6,30,35,0.04) !important;
+  box-shadow: 0 6px 14px rgba(6,30,35,0.06) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+
+.perfil-container .acciones > button.app-btn .mdc-button__label {
+  color: inherit !important;
+}

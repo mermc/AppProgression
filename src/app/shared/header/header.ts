@@ -44,4 +44,9 @@ export class Header {
       this.snackBar.open('No se pudo cerrar sesión', 'Cerrar', { duration: 3000 });
     }
   }
+
+
+  goToDashboard(): void {
+    this.router.navigate(['/dashboard']);
+  }
 }

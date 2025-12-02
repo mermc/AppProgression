@@ -1,5 +1,18 @@
+/* registro-stats.scss
+   Make the estadisticas page visually consistent with the app:
+   - pill-like action buttons (same contract as item-list / detalle)
+   - stronger, readable text colors and consistent hover/focus behavior
+   - month toggle buttons harmonized with pill style
+   - more responsive chart height via clamp()
+   - no functional changes, only presentation
+*/
 
+/* Local fallback radius in case global var is not set */
+:root {
+  --local-btn-radius: 22px;
+}
 
+/* Container */
 .estadisticas-container {
   padding: 20px;
   max-width: 980px;
@@ -9,6 +22,42 @@
   box-sizing: border-box;
 }
 
+/* Layout helpers */
+.stats-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+/* Left items panel */
+.items-panel {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: var(--shadow);
+  min-height: 120px;
+}
+.items-panel h4 {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+  color: var(--text-strong);
+}
+.items-controls { margin-bottom: 8px; }
+.items-list { list-style: none; padding: 0; margin: 0; }
+.items-list-item {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.items-list-item label { display: flex; gap: 8px; align-items: center; cursor: pointer; }
+.color-dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid rgba(6,30,35,0.06); }
+
+/* Right side (main) */
+.stats-main { min-width: 0; }
+
+/* Header */
 .stats-header {
   display: flex;
   flex-direction: column;
@@ -16,7 +65,6 @@
   margin-bottom: 12px;
   text-align: left;
 }
-
 .stats-title {
   margin: 0;
   font-size: 1.25rem;
@@ -33,20 +81,28 @@
   flex-wrap: wrap;
 }
 
-/* Months toggle buttons */
+/* Months toggle: make them pill-like and larger */
 .months-toggle {
   display: flex;
-  gap: 6px;
+  gap: 8px;
+  align-items: center;
 }
-
 .months-button {
-  padding: 6px 10px;
-  border-radius: 6px;
+  padding: 10px 14px;
+  border-radius: var(--btn-radius, var(--local-btn-radius));
   border: 1px solid rgba(6,30,35,0.06);
-  background: transparent;
+  background: var(--brand-100);
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-strong);
+  transition: background 0.16s ease, color 0.16s ease, box-shadow 0.12s ease;
+  box-shadow: 0 4px 10px rgba(6,30,35,0.04);
+}
+.months-button:hover {
+  background: var(--brand-300) !important;
+  color: var(--cta-text) !important;
+  border-color: var(--brand-300) !important;
+  box-shadow: 0 8px 20px rgba(6,30,35,0.08);
 }
 .months-button.active {
   background: var(--brand-300);
@@ -61,111 +117,137 @@
   align-items: center;
   flex-wrap: wrap;
 }
+.percent-change { display: flex; gap: 6px; align-items: baseline; }
+.percent-change .label { color: var(--text-muted); font-size: 0.95rem; }
+.percent-change .value { font-weight: 700; color: var(--brand-500); font-size: 0.98rem; }
+.months-info { color: var(--text-muted); font-size: 0.85rem; }
 
-.percent-change {
-  display: flex;
-  gap: 6px;
-  align-items: baseline;
-  .label {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-  }
-  .value {
-    font-weight: 700;
-    color: var(--brand-500);
-    font-size: 0.98rem;
-  }
-}
-
-.months-info {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-}
-
-
+/* Chart card */
 .chart-card {
   background: var(--card-bg, #fff);
   padding: 14px;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: var(--shadow);
   margin-top: 8px;
-  height: 420px;
+  height: clamp(320px, 40vh, 520px);
   display: flex;
   align-items: stretch;
 }
+.chart-card canvas { width: 100% !important; height: 100% !important; display: block; }
 
-
-.chart-card canvas {
-  width: 100% !important;
-  height: 100% !important;
-  display: block;
-}
-
-
+/* Caption */
 .caption {
   margin-top: 10px;
   padding: 10px 14px;
   background: rgba(6,30,35,0.02);
-  border-radius: 6px;
+  border-radius: 8px;
   color: var(--text-muted);
   font-size: 0.95rem;
 }
 
+/* =========================
+   ACTION BUTTONS (visual contract)
+   Use higher specificity so Material theming (mat-warn, etc.)
+   doesn't change shape or color unintentionally.
+   ========================= */
 
-.stats-actions {
-  margin-top: 12px;
+/* Stats actions (right) and left select-all button */
+.stats-actions,
+.items-controls {
   display: flex;
   gap: 10px;
-  justify-content: flex-end;
+  align-items: center;
 }
 
-
-button[mat-raised-button], button[mat-stroked-button], .months-button {
-  padding: 8px 14px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.95rem;
+/* Apply pill style to action buttons used on this page */
+.estadisticas-container .stats-actions > button[mat-raised-button],
+.estadisticas-container .stats-actions > button[mat-stroked-button],
+.items-controls > .select-all,
+.months-toggle > .months-button {
+  padding: 12px 20px !important;
+  border-radius: var(--btn-radius, var(--local-btn-radius)) !important;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 1.4vw, 1rem);
+  min-height: 44px !important;
+  background: var(--brand-100) !important;
+  color: var(--text-strong) !important;
+  border: 1px solid rgba(6,30,35,0.04) !important;
+  box-shadow: 0 6px 14px rgba(6,30,35,0.06) !important;
+  transition: background 0.16s ease, color 0.16s ease, box-shadow 0.12s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
-button[mat-raised-button] {
-  background: var(--cta-bg);
-  color: var(--cta-text);
-  border: none;
+/* Primary raised CTA - keep filled and white text */
+.estadisticas-container .stats-actions > button[mat-raised-button] {
+  background: var(--cta-bg) !important;
+  color: var(--cta-text) !important;
+  border: none !important;
+  box-shadow: 0 8px 20px rgba(12,192,223,0.12) !important;
 }
 
-button[mat-stroked-button] {
-  background: transparent;
-  color: var(--text-strong);
-  border: 1px solid rgba(6,30,35,0.08);
+/* Stroked button (neutral) - enforce dark text even if color="warn" */
+.estadisticas-container .stats-actions > button[mat-stroked-button] {
+  background: transparent !important;
+  color: var(--text-strong) !important;
+  border: 1px solid rgba(6,30,35,0.08) !important;
 }
 
+/* Prevent mat-warn turning it pink */
+.estadisticas-container .stats-actions > button.mat-warn,
+.estadisticas-container .stats-actions > button[color="warn"],
+.estadisticas-container .items-controls > .select-all.mat-warn,
+.estadisticas-container .items-controls > .select-all[color="warn"] {
+  color: var(--text-strong) !important;
+  background: var(--brand-100) !important;
+  border-color: rgba(6,30,35,0.04) !important;
+}
+
+/* Neutralize persistent active/focused look from Material after mouse click */
+.estadisticas-container .stats-actions .mat-focus-indicator.mat-button.mat-focused,
+.estadisticas-container .stats-actions .mat-focus-indicator.mat-button.mat-active,
+.estadisticas-container .items-controls .mat-focus-indicator.mat-button.mat-focused,
+.estadisticas-container .items-controls .mat-focus-indicator.mat-button.mat-active {
+  background: var(--brand-100) !important;
+  color: var(--text-strong) !important;
+  box-shadow: 0 6px 14px rgba(6,30,35,0.06) !important;
+}
+
+/* Accessibility: focus-visible (keyboard) still shows ring; mouse click won't keep strong outline */
+.estadisticas-container .stats-actions button:focus:not(:focus-visible),
+.estadisticas-container .items-controls button:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.estadisticas-container .stats-actions button:focus-visible,
+.estadisticas-container .items-controls button:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 4px rgba(12,192,223,0.10) !important;
+  border-radius: var(--btn-radius, var(--local-btn-radius)) !important;
+}
+
+/* Multi-item selector small details */
 .multi-item-selector {
   padding: 1rem;
-  background: #fafafa;
+  background: var(--card-bg);
   border-radius: 8px;
   margin-bottom: 1rem;
+}
+.multi-item-selector .item-option { display:flex; align-items:center; gap:.5rem; margin-bottom:.3rem; }
 
-  .item-option {
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-    margin-bottom: .3rem;
+/* Responsive: collapse the left panel under the chart on small screens */
+@media (max-width: 980px) {
+  .stats-layout {
+    grid-template-columns: 1fr;
   }
-
-  .color-dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    display: inline-block;
-  }
+  .items-panel { order: 2; width: 100%; }
+  .stats-main { order: 1; }
 }
 
-
-/* Responsive */
+/* Smaller adjustments for narrow viewports */
 @media (max-width: 700px) {
-  .chart-card { height: 340px; }
+  .chart-card { height: clamp(300px, 35vh, 420px); }
   .stats-actions { justify-content: center; }
   .stats-controls { flex-direction: column; align-items: stretch; }
   .stats-meta { justify-content: space-between; width: 100%; }

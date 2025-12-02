@@ -1,30 +1,46 @@
 <div class="container">
-  <h2>Items asociados</h2>
+  <h1>Items asociados</h1>
+
+  <div class="top-actions">
+    <button mat-button class="app-btn" (click)="addItem()">Añadir otro item</button>
+    <button mat-button class="app-btn" (click)="volver()">Volver al detalle</button>
+  </div>
 
   <div *ngIf="items$ | async as items; else cargando">
     <div *ngIf="items.length > 0; else noData">
-      <mat-card *ngFor="let item of items" class="item-card">
-        <div class="item-header">
-          <strong>{{ item.descripcion }}</strong>
-          <span [style.background]="item.color" class="color-preview"></span>
-        </div>
-        <div class="item-body">
-          <p>Fecha: {{ item.fecha | date }}</p>
-        </div>
+      <div class="items-grid">
+        <mat-card *ngFor="let item of items" class="item-card">
+          <div class="item-header">
+            <strong>{{ item.descripcion }}</strong>
+            <span [style.background]="item.color" class="color-preview"></span>
+          </div>
 
-        <div class="acciones">
-          <button mat-button class="app-btn" (click)="verRegistros(item.id)">Ver Registros</button>
-          <button mat-button class="app-btn" (click)="nuevoRegistro(item.id)">Añadir registro</button>
-          <button mat-button class="app-btn" (click)="editarItem(item.id)">Editar</button>
-          <button mat-button class="app-btn" (click)="eliminarItem(item.id)">Eliminar</button>
-        </div>
-      </mat-card>
+          <div class="item-body">
+            <p>Fecha: {{ item.fecha | date }}</p>
+          </div>
+
+          <div class="acciones">
+            <button mat-button class="app-btn" (click)="verRegistros(item.id)">Ver Registros</button>
+            <button mat-button class="app-btn" (click)="nuevoRegistro(item.id)">Añadir registro</button>
+            <button mat-button class="app-btn" (click)="editarItem(item.id)">Editar</button>
+            <button mat-button class="app-btn" (click)="eliminarItem(item.id)">Eliminar</button>
+          </div>
+        </mat-card>
+      </div>
     </div>
   </div>
 
-<ng-template #noData><p>No hay items todavía.</p></ng-template> 
-<ng-template #cargando><p>Cargando registros...</p></ng-template>
+  <ng-template #noData>
+    <div class="no-data">
+      <p>No hay items todavía.</p>
+    </div>
+  </ng-template>
 
-  <button mat-button class="app-btn" (click)="addItem()">Añadir otro item</button>
-  <button mat-button class="app-btn" (click)="volver()">Volver al detalle</button>
+  <ng-template #cargando>
+    <div class="no-data">
+      <p>Cargando registros...</p>
+    </div>
+  </ng-template>
+
+  
 </div>

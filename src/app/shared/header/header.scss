@@ -15,19 +15,37 @@
   gap: 12px;
 }
 
+/* Clickable brand link (logo + title) */
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.brand-link:focus-visible {
+  box-shadow: 0 0 0 4px rgba(12,192,223,0.10);
+  border-radius: 8px;
+}
+
+/* badge / logo */
 .header-badge {
-width: 36px;
-height: 36px;
-padding: 4px;
-border-radius: 6px;
-background: rgba(255, 255, 255, 0.6);
+  width: 36px;
+  height: 36px;
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.6);
 }
 
 .header-badge .auth-logo {
-width: 100%;
-height: auto;
-display: block;
-object-fit: contain;
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .logo {
@@ -69,9 +87,8 @@ object-fit: contain;
   width: 36px !important;
   height: 36px !important;
   line-height: 36px !important;
-  color: #000 !important;   /* negro sólido para máxima visibilidad */
+  color: #000 !important;  
 }
-
 
 /* Hover/active */
 .action-btn:hover {
@@ -84,7 +101,7 @@ object-fit: contain;
 .logout-btn .header-icon { color: rgba(74,74,74,0.9); }
 
 @media (max-width: 600px) {
-.header-badge { width: 32px; height: 32px; padding: 3px; border-radius: 6px; }
+  .header-badge { width: 32px; height: 32px; padding: 3px; border-radius: 6px; }
 }
 
 @media (max-width: 600px) {

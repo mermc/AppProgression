@@ -8,14 +8,48 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
   imports: [CommonModule, MatDialogModule, MatButtonModule],
   template: `
-    <h1 mat-dialog-title>Item sin registros</h1>
-    <div mat-dialog-content>
-      <p>No hay registros para este ítem</p>
-    </div>
-    <div mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Entendido</button>
-    </div>
+    <h2 mat-dialog-title>Ítem sin registros</h2>
+
+    <mat-dialog-content class="dialog-content">
+      <p>No hay registros para este ítem.</p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end" class="dialog-actions">
+      <!-- Use the app button classes so look & feel matches the rest of the app -->
+      <button mat-raised-button class="app-btn btn-save" mat-dialog-close>
+        Entendido
+      </button>
+    </mat-dialog-actions>
   `,
+  styles: [`
+    :host { display: block; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+    .dialog-content p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.98rem;
+    }
+
+    .dialog-actions {
+      margin-top: 8px;
+    }
+
+    /* Safer local overrides to ensure consistent visuals with global theme */
+    button.app-btn.btn-save {
+      background: var(--cta-bg);
+      color: var(--cta-text);
+      border: none;
+      box-shadow: 0 6px 14px rgba(12,192,223,0.12);
+    }
+
+    /* Make sure stroked/default buttons (if used) use dark text */
+    button.app-btn.btn-cancel,
+    button.mat-stroked-button.btn-cancel {
+      color: var(--text-strong) !important;
+      background: transparent !important;
+      border-color: rgba(6,30,35,0.08) !important;
+    }
+  `]
 })
 export class NoRegistrosDialog {
   constructor(public dialogRef: MatDialogRef<NoRegistrosDialog>) {}

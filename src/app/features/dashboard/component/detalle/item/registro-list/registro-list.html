@@ -1,28 +1,41 @@
 <div class="registro-list">
-  <h2>Registros del ítem</h2>
+  <h1>Registros del ítem</h1>
 
-  <button mat-button class="app-btn" (click)="nuevoRegistro()">Añadir registro</button>
-  <button mat-button class="app-btn" (click)="cancelar()">Cancelar</button>
-  <button mat-button class="app-btn" (click)="verEstadisticas()"> Ver estadísticas </button>
+  <div class="top-actions">
+    <button mat-button class="app-btn" (click)="nuevoRegistro()">Añadir registro</button>
+    
+    <button mat-button class="app-btn" (click)="verEstadisticas()">Ver estadísticas del item</button>
 
+    <button mat-button class="app-btn" (click)="cancelar()">Cancelar</button>
+  </div>
 
   <div *ngIf="(registros$ | async) as registros; else cargando">
     <div *ngIf="registros.length > 0; else noData">
-      <mat-card *ngFor="let reg of registros" class="registro-card">
-        <div class="registro-info">
-        <p><strong>Fecha:</strong> {{ reg.fecha?.toDate() | date: 'shortDate' }}</p>
-        <p><strong>Observaciones:</strong> {{ reg.observaciones }}</p>
-        </div>
-        <div class="registro-acciones">
-          <button mat-button class="app-btn" (click)="editarRegistro(reg.id)">Editar</button>
-          <button mat-button class="app-btn" (click)="eliminarRegistro(reg.id)">Eliminar</button>
-        </div>
-        
-      </mat-card>
+      <div class="records-grid">
+        <mat-card *ngFor="let reg of registros" class="registro-card">
+          <div class="registro-info">
+            <p><strong>Fecha:</strong> {{ reg.fecha?.toDate() | date: 'shortDate' }}</p>
+            <p><strong>Observaciones:</strong> {{ reg.observaciones }}</p>
+          </div>
+
+          <div class="registro-acciones">
+            <button mat-button class="app-btn" (click)="editarRegistro(reg.id)">Editar</button>
+            <button mat-button class="app-btn" (click)="eliminarRegistro(reg.id)">Eliminar</button>
+          </div>
+        </mat-card>
+      </div>
     </div>
   </div>
 
-  <ng-template #noData><p>No hay registros todavía.</p></ng-template>
-  <ng-template #cargando><p>Cargando registros...</p></ng-template>
-  
+  <ng-template #noData>
+    <div class="no-data">
+      <p>No hay registros todavía.</p>
+    </div>
+  </ng-template>
+
+  <ng-template #cargando>
+    <div class="no-data">
+      <p>Cargando registros...</p>
+    </div>
+  </ng-template>
 </div>

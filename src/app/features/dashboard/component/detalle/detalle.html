@@ -1,6 +1,6 @@
 <div class="detalle-container" *ngIf="!cargando; else cargandoTpl">
   <mat-card>
-    <h2>Detalle {{ tipo === 'personas' ? 'de la persona' : 'del grupo' }}</h2>
+    <h2>Detalle {{ tipo === 'personas' ? 'persona' : 'grupo' }}</h2>
 
     <form [formGroup]="form">
       <mat-form-field appearance="outline" class="campo">
