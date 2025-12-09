@@ -1,11 +1,6 @@
-/* registro-form.scss
-   Align registro form controls + buttons with global/detail/item styles.
-   - Buttons adopt pill look consistent with item-list
-   - Inputs and labels larger and readable
-   - Accessibility and responsive behavior preserved
-*/
+@use 'src/styles/_buttons';
 
-/* container */
+// Contenedor principal del formulario
 .registro-form-container {
   max-width: 720px;
   margin: 2.5rem auto;
@@ -16,7 +11,7 @@
   box-sizing: border-box;
 }
 
-/* heading */
+// titulo
 .registro-form-container h2 {
   margin: 0 0 1rem;
   color: var(--text-strong);
@@ -24,7 +19,7 @@
   font-size: clamp(1.15rem, 2.6vw, 1.4rem);
 }
 
-/* inputs */
+// inputs
 .campo { display: block; width: 100%; margin-bottom: 1rem; }
 
 .mat-input-element {
@@ -38,7 +33,7 @@
   font-size: clamp(0.95rem, 1.6vw, 1rem);
 }
 
-/* botones row */
+// fila de botones
 .botones {
   display: flex;
   gap: 14px;
@@ -48,65 +43,26 @@
   margin-top: 12px;
 }
 
-/* Button visuals (high specificity to avoid theme overrides) */
-.registro-form-container .botones > .app-btn,
-.registro-form-container .botones > button.mat-button,
-.registro-form-container .botones > button.mat-flat-button,
-.registro-form-container .botones > button.mat-stroked-button {
-  color: var(--text-strong) !important;
-  background: var(--brand-100) !important;
-  border: 1px solid rgba(6,30,35,0.04) !important;
-  padding: 12px 22px !important;
-  font-size: clamp(0.98rem, 1.6vw, 1.05rem) !important;
-  min-height: 48px !important;
-  border-radius: var(--btn-radius, 22px) !important;
-  box-shadow: 0 6px 14px rgba(6,30,35,0.06) !important;
-  transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s;
-  display: inline-flex !important;
-  align-items: center;
-  gap: 8px;
+.botones .app-btn {
+  @extend .app-btn;
 }
 
-.registro-form-container .botones > .app-btn mat-icon {
-  color: var(--text-strong) !important;
+.botones .btn-save {
+  @extend .btn-primary;
 }
 
-/* hover */
-.registro-form-container .botones > .app-btn:hover,
-.registro-form-container .botones > button.mat-button:hover {
-  background: var(--brand-300) !important;
-  color: var(--cta-text) !important;
-  border-color: var(--brand-300) !important;
-  box-shadow: 0 8px 20px rgba(6,30,35,0.10) !important;
+.botones .btn-secondary {
+  @extend .btn-secondary;
 }
 
-/* neutralize mat-warn */
-.registro-form-container .botones button.mat-warn,
-.registro-form-container .botones button[color="warn"] {
-  color: var(--text-strong) !important;
-  background: var(--brand-100) !important;
-  border-color: rgba(6,30,35,0.04) !important;
-}
-
-/* focus-visible */
-.registro-form-container .botones .app-btn:focus:not(:focus-visible) {
-  outline: none !important;
-  box-shadow: none !important;
-}
-.registro-form-container .botones .app-btn:focus-visible {
-  outline: none !important;
-  box-shadow: 0 0 0 4px rgba(12,192,223,0.10) !important;
-  border-radius: var(--btn-radius, 22px) !important;
-}
-
-/* responsive tweaks */
+//responsive
 @media (max-width: 880px) {
   .registro-form-container { padding: 14px; }
   .registro-form-container .botones > .app-btn { padding: 10px 16px !important; min-height: 44px; border-radius: 18px; }
   .botones { justify-content: center; }
 }
 
-/* very small screens: stack */
+//pantallas muy pequeñas
 @media (max-width: 520px) {
   .botones { flex-direction: column-reverse; align-items: stretch; gap: 10px; }
   .botones .app-btn { width: 100%; }

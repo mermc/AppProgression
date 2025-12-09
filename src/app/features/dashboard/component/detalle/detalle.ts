@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-detalle',
@@ -20,7 +21,8 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
   ]
 })
 export class Detalle implements OnInit {

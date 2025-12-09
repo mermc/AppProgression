@@ -15,9 +15,14 @@
     </mat-form-field>
 
     <div class="botones">
-      <button mat-button class="app-btn" [disabled]="form.invalid">Guardar</button>
-      <button mat-button class="app-btn" (click)="cancelar()">Volver a listado items</button>
-      <button mat-button class="app-btn" (click)="cancelarRegistros()">Volver a listado registros</button>
+       <button mat-button class="app-btn btn-save" [disabled]="form.invalid" type="submit" >
+      <mat-icon>save</mat-icon>Guardar</button>
+
+      <button mat-button class="app-btn btn-secondary" type="button" (click)="cancelar()" >
+       <mat-icon>arrow_back</mat-icon> Volver a listado items </button>
+
+      <button mat-button class="app-btn btn-secondary" type="button" (click)="cancelarRegistros()" >
+      <mat-icon>arrow_back</mat-icon> Volver a listado registros </button>
     </div>
   </form>
 </div>

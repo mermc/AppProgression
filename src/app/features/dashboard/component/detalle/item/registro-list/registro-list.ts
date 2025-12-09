@@ -6,13 +6,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCard } from "@angular/material/card";
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-registro-list',
   standalone: true,
   templateUrl: './registro-list.html',
   styleUrls: ['./registro-list.scss'],
-  imports: [CommonModule, MatButtonModule, MatCard]
+  imports: [CommonModule, MatButtonModule, MatCard, MatIconModule]
 })
 export class RegistroList implements OnInit {
   registros$!: Observable<any[]>;

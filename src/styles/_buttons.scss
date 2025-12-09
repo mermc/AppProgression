@@ -1,6 +1,4 @@
-/* --------------------------------------------
- BOTONES COMUNES 
---------------------------------------------- */
+// Botones comunes de la aplicacion
 
 :root {
   --btn-radius: 22px; 
@@ -22,14 +20,15 @@
   border: none;
   transition: 0.3s ease;
   text-decoration: none;
+  font-size: 0.95rem;
 
-  /* Angular Material */
+  // Angular Material
   mat-icon {
     font-size: 22px;
     color: inherit;
   }
 
-  &:hover {
+  &:hover:not(:disabled) {
     background: var(--brand-300);
     color: #fff;
     box-shadow: 0 4px 10px rgba(6, 30, 35, 0.15);
@@ -41,24 +40,91 @@
   }
 }
 
-/* Button como toggle (preserve its pill shape and slightly different styling) */
+.app-btn--small {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: 16px;
+}
+
+.app-btn--large {
+  padding: 14px 22px;
+  font-size: 1.05rem;
+}
+
+// Roles
+
+// Main CTA = Guardar / Crear / Registrarme / Inicia sesión
+.btn-primary {
+  background: var(--cta-bg) !important;
+  color: var(--cta-text) !important;
+  box-shadow: 0 6px 14px rgba(6, 30, 35, 0.12);
+  border: none !important;
+
+  &:hover:not(:disabled) {
+    background: var(--cta-bg-hover) !important;
+    box-shadow: 0 8px 18px rgba(6, 30, 35, 0.16);
+  }
+}
+
+// Importante pero secundario = Añadir item/registro (soft brand)
+.btn-primary-light {
+  background: var(--brand-100) !important;
+  color: var(--brand-500) !important;
+  border: 1px solid rgba(6,30,35,0.04) !important;
+
+  &:hover:not(:disabled) {
+    background: var(--brand-300) !important;
+    color: #fff !important;
+  }
+}
+
+// Secundario/ outline = Cancelar / Volver
+.btn-secondary {
+  background: transparent !important;
+  color: var(--text-strong) !important;
+  border: 1px solid rgba(6, 30, 35, 0.12) !important;
+  box-shadow: none !important;
+
+  &:hover:not(:disabled) {
+    background: rgba(6, 30, 35, 0.03) !important;
+  }
+}
+
+// Enfasis bajo
+.btn-ghost {
+  background: transparent !important;
+  color: var(--text-strong) !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  &:hover:not(:disabled) {
+    background: rgba(6, 30, 35, 0.04) !important;
+  }
+}
+
+// Destructor
+.btn-danger {
+  background: transparent !important;
+  color: #b00020 !important;
+  border: 1px solid rgba(176, 0, 32, 0.25) !important;
+
+  &:hover:not(:disabled) {
+    background: rgba(176, 0, 32, 0.08) !important;
+  }
+}
+
+// Boton como toggle
 .add-btn {
+  border-radius: 999px;
   background: var(--brand-100) !important;
   color: var(--text-strong) !important;
   font-weight: 600;
-  border-radius: calc(var(--btn-radius) + 0px);
-  padding: 10px 26px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: 0.25s ease;
-  border: none !important;
+  padding: 10px 22px;
   box-shadow: 0 2px 6px rgba(6, 30, 35, 0.08);
 
-  /* Force Material button base */
-  &.mat-button { background: var(--brand-100) !important; color: var(--text-strong) !important; }
-
-  mat-icon { font-size: 20px; color: inherit !important; }
+  mat-icon {
+    font-size: 20px;
+  }
 
   &:hover {
     background: var(--brand-300) !important;
@@ -67,26 +133,29 @@
   }
 }
 
-/* Pill / large CTA */
+// Pill / large CTA
 .pill-btn {
   background: var(--brand-100);
-  color: var(--brand-500);
+  color: var(--text-strong);
   font-weight: 700;
-  border-radius: var(--btn-radius);
-  padding: 12px 22px;
+  border-radius: 18px;
+  padding: 12px 26px;
   min-height: 48px;
-  font-size: 1.25rem;
-  display: flex;
+  font-size: 1.05rem;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
   box-shadow: 0 2px 6px rgba(6, 30, 35, 0.08);
-  transition: 0.25s ease;
+  border: none;
+  cursor: pointer;
 
-  mat-icon { font-size: 22px; }
+  mat-icon {
+    font-size: 20px;
+  }
 
-  &:hover { background: var(--brand-300); color: #fff; box-shadow: 0 4px 10px rgba(6, 30, 35, 0.15); }
-
-  &:active { transform: scale(0.97); }
+  &:hover {
+    background: var(--brand-300);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(6, 30, 35, 0.15);
+  }
 }
-.app-btn--small { padding: 6px 12px; font-size: 0.85rem; border-radius: 12px; }
-.app-btn--large { padding: 14px 22px; font-size: 1.1rem; }

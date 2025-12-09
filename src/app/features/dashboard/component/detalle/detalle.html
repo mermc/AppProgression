@@ -19,11 +19,30 @@
       </mat-form-field>
 
       <div class="botones">
-        <button mat-button class="app-btn btn-save" (click)="guardarCambios()">Guardar</button>
-        <button mat-button class="app-btn" (click)="addItem()">Añadir item</button>
-        <button mat-button class="app-btn" (click)="verItems()">Ver items asociados</button>
-        <button mat-button class="app-btn" (click)="eliminar()">Eliminar</button>
-        <button mat-button class="app-btn" (click)="volver()">Volver</button>
+        <button mat-button class="app-btn btn-save" (click)="guardarCambios()">
+    <mat-icon>save</mat-icon>
+    Guardar
+  </button>
+
+  <button mat-button class="app-btn btn-primary-light" (click)="addItem()">
+    <mat-icon>playlist_add</mat-icon>
+    Añadir item
+  </button>
+
+  <button mat-button class="app-btn" (click)="verItems()">
+    <mat-icon>list</mat-icon>
+    Ver items asociados
+  </button>
+
+  <button mat-button class="app-btn btn-danger" (click)="eliminar()">
+    <mat-icon>delete</mat-icon>
+    Eliminar
+  </button>
+
+  <button mat-button class="app-btn btn-ghost" (click)="volver()">
+    <mat-icon>arrow_back</mat-icon>
+    Volver
+  </button>
       </div>
     </form>
   </mat-card>

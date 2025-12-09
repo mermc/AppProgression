@@ -13,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { query, orderBy } from 'firebase/firestore';
-import { RegistroList } from '../item/registro-list/registro-list';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -22,7 +22,7 @@ import { RegistroList } from '../item/registro-list/registro-list';
   standalone: true,
   templateUrl: './item-list.html',
   styleUrls: ['./item-list.scss'],
-  imports: [CommonModule, MatButtonModule, MatCardModule]
+  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule]
 })
 export class ItemList implements OnInit {
   tipo!: 'personas' | 'grupos';

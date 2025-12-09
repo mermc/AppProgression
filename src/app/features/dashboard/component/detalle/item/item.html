@@ -20,12 +20,20 @@
     </mat-form-field>
 
     <div class="acciones">
-      <button mat-raised-button class="app-btn btn-save" type="submit">
-        {{ modoEdicion ? 'Guardar' : 'Crear' }}
-      </button>
-      
-      <button mat-stroked-button class="app-btn btn-cancel" type="button" (click)="cancelar()">Cancelar</button>
-      
+      <button mat-button class="app-btn btn-save" type="submit">
+    <mat-icon>save</mat-icon>
+    {{ modoEdicion ? 'Guardar' : 'Crear' }}
+  </button>
+
+  <button
+    mat-button
+    class="app-btn btn-cancel"
+    type="button"
+    (click)="cancelar()"
+  >
+    <mat-icon>arrow_back</mat-icon>
+    Volver
+  </button>
     </div>
   </form>
 </div>

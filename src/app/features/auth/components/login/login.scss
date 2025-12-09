@@ -1,6 +1,6 @@
-/* ===============================
-   AUTH LAYOUT (shared)
-================================ */
+@use 'src/styles/_buttons';
+
+// estilo base para el componente de login
 
 .auth-container {
   display: flex;
@@ -16,14 +16,12 @@
   max-width: 480px;
   padding: 32px 28px;
   border-radius: 20px;
-  background: #fff;
+  background: #ffff;
   box-shadow: 0 4px 16px rgba(6, 30, 35, 0.08);
   animation: fadeIn 0.3s ease;
 }
 
-/* ===============================
-   HEADER SECTION
-================================ */
+// HEADER 
 
 .auth-header {
 display: flex;
@@ -50,9 +48,7 @@ margin: 0 auto;
   color: var(--text-muted);
 }
 
-/* ===============================
-   FORM AREA
-================================ */
+// area de formulario
 
 .auth-form {
   display: grid;
@@ -63,46 +59,35 @@ margin: 0 auto;
   width: 100%;
 }
 
-/* Buttons adaptados para.app-btn */
+// Buttons adaptados para.app-btn
 
 .auth-btn-primary {
+  @extend .app-btn;
+  @extend .btn-primary;
   width: 100%;
   justify-content: center;
-  background: var(--cta-blue) !important;
-  color: #fff !important;
+  border-radius: 999px;
   font-size: 1rem;
-  border-radius: 10px;
-  transition: 0.25s ease;
-
-  &:hover:not(:disabled) {
-    background: var(--cta-blue-hover) !important;
-    box-shadow: 0 4px 10px rgba(20, 91, 143, 0.25);
-  }
 }
 
-/* Soft secondary action */
 .auth-btn-secondary {
+  @extend .app-btn;
+  @extend .btn-secondary;
   width: 100%;
   justify-content: center;
-  background: var(--cta-secondary-bg) !important;
-  color: var(--cta-secondary-text) !important;
-  border-radius: 10px;
   font-size: 0.95rem;
-  transition: 0.25s ease;
+}
 
-  &:hover:not(:disabled) {
-    background: #d4e8f6 !important;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-  }
+.auth-btn-inline {
+  width: auto;
+  margin-left: 6px;
+  border-radius: 999px;
+  padding-inline: 14px;
 }
 
 
-/* ===============================
-   TEXT LINKS
-================================ */
+
+// TEXTO PEQUEÑO Y LINKS
 
 .auth-smalltext {
   margin-top: 10px;
@@ -127,9 +112,7 @@ margin: 0 auto;
   font-weight: 600;
 }
 
-/* ===============================
-   MESSAGES
-================================ */
+//MENSAJES DE ERROR Y AVISO
 
 .auth-msg {
   margin-top: 8px;
@@ -144,9 +127,7 @@ margin: 0 auto;
   }
 }
 
-/* ===============================
-   EFFECTS
-================================ */
+// efectos y responsive
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(6px); }

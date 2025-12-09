@@ -18,6 +18,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Timestamp } from 'firebase/firestore';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-item',
@@ -30,7 +31,8 @@ import { Timestamp } from 'firebase/firestore';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ]
 })
 export class Item implements OnInit {
@@ -122,6 +124,16 @@ export class Item implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate([`/dashboard/detalle/${this.parentTipo}/${this.parentId}`]);
+  if (this.modoEdicion) {
+    // Si estamos editando, volver a la lista de items
+    this.router.navigate([
+      `/dashboard/detalle/${this.parentTipo}/${this.parentId}/items`
+    ]);
+  } else {
+    // Si estamos creando, volver al detalle del padre
+    this.router.navigate([
+      `/dashboard/detalle/${this.parentTipo}/${this.parentId}`
+    ]);
   }
+}
 }

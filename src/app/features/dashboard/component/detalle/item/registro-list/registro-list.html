@@ -2,11 +2,14 @@
   <h1>Registros del ítem</h1>
 
   <div class="top-actions">
-    <button mat-button class="app-btn" (click)="nuevoRegistro()">Añadir registro</button>
-    
-    <button mat-button class="app-btn" (click)="verEstadisticas()">Ver estadísticas del item</button>
+    <button mat-button class="app-btn btn-primary-light" (click)="nuevoRegistro()">
+    <mat-icon>note_add</mat-icon>Añadir registro</button>
 
-    <button mat-button class="app-btn" (click)="cancelar()">Cancelar</button>
+    <button mat-button class="app-btn" (click)="verEstadisticas()">
+    <mat-icon>insights</mat-icon> Ver estadísticas del item </button>
+
+    <button mat-button class="app-btn btn-secondary" (click)="cancelar()">
+    <mat-icon>arrow_back</mat-icon> Volver</button>
   </div>
 
   <div *ngIf="(registros$ | async) as registros; else cargando">
@@ -19,8 +22,11 @@
           </div>
 
           <div class="registro-acciones">
-            <button mat-button class="app-btn" (click)="editarRegistro(reg.id)">Editar</button>
-            <button mat-button class="app-btn" (click)="eliminarRegistro(reg.id)">Eliminar</button>
+            <button mat-button class="app-btn" (click)="editarRegistro(reg.id)">
+            <mat-icon>edit</mat-icon> Editar</button>
+
+            <button mat-button class="app-btn btn-danger" (click)="eliminarRegistro(reg.id)"  >
+            <mat-icon>delete</mat-icon> Eliminar</button>
           </div>
         </mat-card>
       </div>

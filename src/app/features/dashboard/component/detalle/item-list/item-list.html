@@ -2,8 +2,14 @@
   <h1>Items asociados</h1>
 
   <div class="top-actions">
-    <button mat-button class="app-btn" (click)="addItem()">Añadir otro item</button>
-    <button mat-button class="app-btn" (click)="volver()">Volver al detalle</button>
+    <button mat-button class="app-btn btn-primary-light" (click)="addItem()">
+    <mat-icon>add</mat-icon>
+    Añadir otro item
+  </button>
+  <button mat-button class="app-btn btn-secondary" (click)="volver()">
+    <mat-icon>arrow_back</mat-icon>
+    Volver al detalle
+  </button>
   </div>
 
   <div *ngIf="items$ | async as items; else cargando">
@@ -20,10 +26,22 @@
           </div>
 
           <div class="acciones">
-            <button mat-button class="app-btn" (click)="verRegistros(item.id)">Ver Registros</button>
-            <button mat-button class="app-btn" (click)="nuevoRegistro(item.id)">Añadir registro</button>
-            <button mat-button class="app-btn" (click)="editarItem(item.id)">Editar</button>
-            <button mat-button class="app-btn" (click)="eliminarItem(item.id)">Eliminar</button>
+           <button mat-button class="app-btn" (click)="verRegistros(item.id)">
+    <mat-icon>table_rows</mat-icon>
+    Ver registros
+  </button>
+  <button mat-button class="app-btn btn-primary-light" (click)="nuevoRegistro(item.id)">
+    <mat-icon>note_add</mat-icon>
+    Añadir registro
+  </button>
+  <button mat-button class="app-btn" (click)="editarItem(item.id)">
+    <mat-icon>edit</mat-icon>
+    Editar
+  </button>
+  <button mat-button class="app-btn btn-danger" (click)="eliminarItem(item.id)">
+    <mat-icon>delete</mat-icon>
+    Eliminar
+  </button>
           </div>
         </mat-card>
       </div>

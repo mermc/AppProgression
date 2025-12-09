@@ -1,9 +1,11 @@
-/* Local helpers to ensure consistent pill radius (falls back to numeric value if variable missing) */
+@use 'src/styles/_buttons';
+
+// button local  para este componente
 :root {
   --local-btn-radius: 22px;
 }
 
-/* Container and headings */
+//titulos y contenedor principal
 .container {
   padding: 16px;
   max-width: 1200px;
@@ -17,7 +19,7 @@ h2 {
   font-weight: 800;
 }
 
-/* Grid for cards */
+// Grid para las cards de items
 .items-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -25,7 +27,7 @@ h2 {
   margin-bottom: 18px;
 }
 
-/* Card visual */
+// Card visual
 .item-card {
   padding: 18px;
   border-radius: 12px;
@@ -37,7 +39,7 @@ h2 {
   box-sizing: border-box;
 }
 
-/* Header */
+//Titulo
 .item-header {
   display: flex;
   align-items: center;
@@ -51,7 +53,7 @@ h2 {
   word-break: break-word;
 }
 
-/* Color preview */
+// Color preview
 .color-preview {
   display: inline-block;
   width: 18px;
@@ -63,14 +65,14 @@ h2 {
   box-shadow: inset 0 0 0 2px rgba(255,255,255,0.02);
 }
 
-/* Body */
+// Body
 .item-body p {
   margin: 0;
   color: var(--text-muted);
   font-size: 0.95rem;
 }
 
-/* Actions toolbar inside card */
+// Acciones toolbar dentro de card
 .acciones {
   display: flex;
   gap: 12px;
@@ -80,123 +82,47 @@ h2 {
   margin-top: 6px;
 }
 
-/* ===========================================
-   Ensure top-actions (buttons under title) are styled same as bottom-actions
-   Reason: previously top buttons were not in a targeted wrapper and therefore
-   Angular Material theme rules (accent/warn) produced small/pink pills.
-   We cover both top and bottom action wrappers with the same high-specificity selectors.
-   =========================================== */
 
-/* Target app-btns and Material button types inside .item-card/.bottom-actions/.top-actions */
-.item-card .acciones > .app-btn,
-.item-card .acciones > button.mat-button,
-.item-card .acciones > button.mat-flat-button,
-.item-card .acciones > button.mat-stroked-button,
-.container > .bottom-actions > .app-btn,
-.container > .bottom-actions > button.mat-button,
-.container > .top-actions > .app-btn,
-.container > .top-actions > button.mat-button {
-  color: var(--text-strong) !important;                    
-  background: var(--brand-100) !important;        
-  border: 1px solid rgba(6,30,35,0.04) !important;
-  padding: 12px 22px !important;                    
-  font-size: clamp(0.98rem, 1.6vw, 1.05rem) !important;    
-  min-height: 48px !important;                            
-  border-radius: var(--btn-radius, var(--local-btn-radius)) !important; 
-  box-shadow: 0 6px 14px rgba(6,30,35,0.06) !important;
-  transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s;
-  display: inline-flex !important;
-  align-items: center;
-  gap: 8px;
-}
-
-/* Icon color inside these buttons */
-.item-card .acciones .app-btn mat-icon,
-.item-card .acciones button.mat-button mat-icon,
-.container > .bottom-actions .app-btn mat-icon,
-.container > .top-actions .app-btn mat-icon {
-  color: var(--text-strong) !important;
-  font-size: 18px !important;
-}
-
-/* Hover state: brand background and white text (same as detalle) */
-.item-card .acciones > .app-btn:hover,
-.item-card .acciones > button.mat-button:hover,
-.container > .bottom-actions > .app-btn:hover,
-.container > .bottom-actions > button.mat-button:hover,
-.container > .top-actions > .app-btn:hover,
-.container > .top-actions > button.mat-button:hover {
-  background: var(--brand-300) !important;
-  color: var(--cta-text) !important;
-  border-color: var(--brand-300) !important;
-  box-shadow: 0 8px 20px rgba(6,30,35,0.10) !important;
-}
-
-/* Prevent mat-warn / color="warn" from turning text pink here */
-.item-card .acciones button.mat-warn,
-.item-card .acciones button[color="warn"],
-.container > .bottom-actions button.mat-warn,
-.container > .bottom-actions button[color="warn"],
-.container > .top-actions button.mat-warn,
-.container > .top-actions button[color="warn"] {
-  color: var(--text-strong) !important;
-  background: var(--brand-100) !important;
-  border-color: rgba(6,30,35,0.04) !important;
-}
-
-/* Center no-data / loading area */
-.no-data {
-  margin: 24px 0;
-  text-align: center;
-  color: var(--text-muted);
-}
-
-/* Bottom actions: centered under contents (bigger spacing like detalle) */
-.bottom-actions {
-  margin-top: 18px;
-  display: flex;
-  gap: 14px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* Top actions (under the H2) - small spacing so it sits close to title like in other pages */
+// Buttons en .acciones, .bottom-actions, .top-actions
+.bottom-actions,
 .top-actions {
-  margin: 10px 0 6px;
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
   align-items: center;
+}
+
+.top-actions {
+  margin: 10px 0 6px;
+}
+
+.bottom-actions {
+  margin-top: 18px;
+  justify-content: center;
+  gap: 14px;
+}
+
+.top-actions .app-btn,
+.bottom-actions .app-btn,
+.item-card .acciones .app-btn {
+  @extend .app-btn;
+}
+
+.item-card .acciones {
+  display: flex;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
-/* Neutralize persistent "active" / "focused" look left by Material after mouse click */
-.item-card .acciones .mat-focus-indicator.mat-button.mat-focused,
-.item-card .acciones .mat-focus-indicator.mat-button.mat-active,
-.container .bottom-actions .mat-focus-indicator.mat-button.mat-focused,
-.container .bottom-actions .mat-focus-indicator.mat-button.mat-active,
-.container .top-actions .mat-focus-indicator.mat-button.mat-focused,
-.container .top-actions .mat-focus-indicator.mat-button.mat-active {
-  background: var(--brand-100) !important;
-  box-shadow: 0 6px 14px rgba(6,30,35,0.06) !important;
-  color: var(--text-strong) !important;
+.item-card .acciones .btn-primary-light {
+  @extend .btn-primary-light;
 }
 
-/* Keyboard users still get a visible focus ring (focus-visible) */
-.item-card .acciones .app-btn:focus:not(:focus-visible),
-.container .bottom-actions .app-btn:focus:not(:focus-visible),
-.container .top-actions .app-btn:focus:not(:focus-visible) {
-  outline: none !important;
-  box-shadow: none !important;
-}
-.item-card .acciones .app-btn:focus-visible,
-.container .bottom-actions .app-btn:focus-visible,
-.container .top-actions .app-btn:focus-visible {
-  outline: none !important;
-  box-shadow: 0 0 0 4px rgba(12,192,223,0.10) !important;
-  border-radius: var(--btn-radius, var(--local-btn-radius)) !important;
+.bottom-actions .btn-secondary {
+  @extend .btn-secondary;
 }
 
-/* Responsiveness: compress on smaller screens */
+// Responsive adjustments
 @media (max-width: 880px) {
   .container { padding: 12px; }
   .item-card { padding: 14px; }
@@ -210,7 +136,7 @@ h2 {
   .bottom-actions { gap: 12px; }
 }
 
-/* Very small screens: stack and full-width */
+//pantallas pequeñas
 @media (max-width: 520px) {
   .bottom-actions { flex-direction: column-reverse; align-items: stretch; gap: 10px; }
   .bottom-actions .app-btn { width: 100%; }

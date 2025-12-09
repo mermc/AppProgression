@@ -1,9 +1,11 @@
-/* local fallback radius if global var is not present */
+@use 'src/styles/_buttons';
+
+// Local button radius variable
 :root {
   --local-btn-radius: 22px;
 }
 
-/* Container */
+//Contenedor principal
 .registro-list {
   padding: 16px;
   max-width: 1200px;
@@ -17,7 +19,7 @@
   font-weight: 800;
 }
 
-/* Grid for registro cards */
+// Grid para registro cards
 .records-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -25,7 +27,7 @@
   margin-bottom: 18px;
 }
 
-/* Card style */
+// Estilo de card de registro
 .registro-card {
   padding: 18px;
   border-radius: 12px;
@@ -37,14 +39,14 @@
   box-sizing: border-box;
 }
 
-/* registro info */
+// registro info
 .registro-info p {
   margin: 0;
   color: var(--text-muted);
   font-size: 0.95rem;
 }
 
-/* registro card actions */
+// registro card acciones
 .registro-acciones {
   display: flex;
   gap: 12px;
@@ -54,7 +56,6 @@
   margin-top: 6px;
 }
 
-/* Top + bottom actions wrapper */
 .top-actions,
 .bottom-actions {
   display: flex;
@@ -64,93 +65,27 @@
   margin-bottom: 12px;
 }
 
-/* -------------------------
-   Button visual contract (high specificity)
-   ------------------------- */
-.registro-card .registro-acciones > .app-btn,
-.registro-card .registro-acciones > button.mat-button,
-.registro-card .registro-acciones > button.mat-flat-button,
-.registro-card .registro-acciones > button.mat-stroked-button,
-.registro-list > .top-actions > .app-btn,
-.registro-list > .top-actions > button.mat-button,
-.registro-list > .bottom-actions > .app-btn,
-.registro-list > .bottom-actions > button.mat-button {
-  color: var(--text-strong) !important;
-  background: var(--brand-100) !important;
-  border: 1px solid rgba(6,30,35,0.04) !important;
-  padding: 12px 22px !important;
-  font-size: clamp(0.98rem, 1.6vw, 1.05rem) !important;
-  min-height: 48px !important;
-  border-radius: var(--btn-radius, var(--local-btn-radius)) !important;
-  box-shadow: 0 6px 14px rgba(6,30,35,0.06) !important;
-  transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s;
-  display: inline-flex !important;
-  align-items: center;
-  gap: 8px;
+.top-actions .app-btn,
+.bottom-actions .app-btn,
+.registro-acciones .app-btn {
+  @extend .app-btn;
 }
 
-/* Icon color */
-.registro-card .registro-acciones .app-btn mat-icon,
-.registro-card .registro-acciones button.mat-button mat-icon,
-.registro-list > .top-actions .app-btn mat-icon,
-.registro-list > .bottom-actions .app-btn mat-icon {
-  color: var(--text-strong) !important;
-  font-size: 18px !important;
+.top-actions .btn-primary-light {
+  @extend .btn-primary-light;
 }
 
-/* Hover */
-.registro-card .registro-acciones > .app-btn:hover,
-.registro-card .registro-acciones > button.mat-button:hover,
-.registro-list > .top-actions > .app-btn:hover,
-.registro-list > .bottom-actions > .app-btn:hover {
-  background: var(--brand-300) !important;
-  color: var(--cta-text) !important;
-  border-color: var(--brand-300) !important;
-  box-shadow: 0 8px 20px rgba(6,30,35,0.10) !important;
+.top-actions .btn-secondary {
+  @extend .btn-secondary;
 }
 
-/* Prevent mat-warn from turning things pink */
-.registro-card .registro-acciones button.mat-warn,
-.registro-list > .top-actions button.mat-warn,
-.registro-list > .bottom-actions button.mat-warn {
-  color: var(--text-strong) !important;
-  background: var(--brand-100) !important;
-  border-color: rgba(6,30,35,0.04) !important;
+.registro-acciones .btn-danger {
+  @extend .btn-danger;
 }
 
-/* Center no-data */
-.no-data {
-  margin: 24px 0;
-  text-align: center;
-  color: var(--text-muted);
-}
 
-/* Neutralize persistent "active" / "focused" leftover visuals after mouse click */
-.registro-card .registro-acciones .mat-focus-indicator.mat-button.mat-focused,
-.registro-card .registro-acciones .mat-focus-indicator.mat-button.mat-active,
-.registro-list .bottom-actions .mat-focus-indicator.mat-button.mat-focused,
-.registro-list .bottom-actions .mat-focus-indicator.mat-button.mat-active {
-  background: var(--brand-100) !important;
-  box-shadow: 0 6px 14px rgba(6,30,35,0.06) !important;
-  color: var(--text-strong) !important;
-}
 
-/* keyboard focus-visible */
-.registro-card .registro-acciones .app-btn:focus:not(:focus-visible),
-.registro-list .bottom-actions .app-btn:focus:not(:focus-visible),
-.registro-list .top-actions .app-btn:focus:not(:focus-visible) {
-  outline: none !important;
-  box-shadow: none !important;
-}
-.registro-card .registro-acciones .app-btn:focus-visible,
-.registro-list .bottom-actions .app-btn:focus-visible,
-.registro-list .top-actions .app-btn:focus-visible {
-  outline: none !important;
-  box-shadow: 0 0 0 4px rgba(12,192,223,0.10) !important;
-  border-radius: var(--btn-radius, var(--local-btn-radius)) !important;
-}
-
-/* responsiveness */
+//responsive
 @media (max-width: 880px) {
   .registro-list { padding: 12px; }
   .registro-card { padding: 14px; }
@@ -163,7 +98,7 @@
   }
 }
 
-/* very small screens */
+//pantallas muy pequeñas
 @media (max-width: 520px) {
   .registro-list .bottom-actions { flex-direction: column-reverse; align-items: stretch; gap: 10px; }
   .registro-list .bottom-actions .app-btn { width: 100%; }
