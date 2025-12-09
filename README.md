@@ -401,7 +401,6 @@ Algunas posibles líneas de evolución del proyecto:
 - Internacionalización (i18n) más allá del locale `es-ES`.
 - Microservicios adicionales mediante Cloud Functions (por ejemplo: generación de informes periódicos o tareas programadas).
 - Mejora de tests unitarios y de integración (mocks de servicios Firebase, pruebas de guards, etc.).
-- Implementar completamente la edición de registros cargando los datos existentes en `RegistroForm` al entrar con `:registroId`.
 
 ---
 
