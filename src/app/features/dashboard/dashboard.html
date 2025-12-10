@@ -17,6 +17,17 @@
           Grupos
         </mat-button-toggle>
       </mat-button-toggle-group>
+
+      <!-- Buscador -->
+  <div class="search-wrapper">
+    <mat-icon class="search-icon">search</mat-icon>
+    <input
+      type="text"
+      [(ngModel)]="buscarContenido"
+      placeholder="Buscar por nombre"
+      class="search-input" />
+  </div>
+
               <!-- Botón -->
         <button mat-button class="app-btn add-btn btn-primary-light" (click)="crearNuevo()">
         <mat-icon>add</mat-icon> Añadir Persona/Grupo</button>
@@ -28,7 +39,7 @@
       <div class="grid">
         <mat-card
           class="card-item clickable-item"
-          *ngFor="let item of (vistaActual === 'personas' ? personas$ : grupos$) | async"
+          *ngFor="let item of elementosFiltrados"
           (click)="irADetalle(item, vistaActual)"
         >
           <div class="card-top">

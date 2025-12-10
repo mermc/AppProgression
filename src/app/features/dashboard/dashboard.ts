@@ -38,7 +38,12 @@ export class Dashboard implements OnInit {
   personas$!: Observable<any[]>;
   grupos$!: Observable<any[]>;
 
+  //arrays locales para filtrar y encontrar
+  personas: any[] = [];
+  grupos: any[] = [];
+
   vistaActual: 'personas' | 'grupos' = 'personas';
+  buscarContenido = '';
 
   constructor(
     private firestore: Firestore,
@@ -69,6 +74,10 @@ export class Dashboard implements OnInit {
       query(gruposRef, where('userId', '==', userId)),
       { idField: 'id' }
     );
+
+    // suscribimos una vez para tener arrays en memoria
+    this.personas$.subscribe(p => this.personas = p);
+    this.grupos$.subscribe(g => this.grupos = g);
   }
 
   cambiarVista(tipo: 'personas' | 'grupos'): void {
@@ -84,5 +93,15 @@ export class Dashboard implements OnInit {
     this.router.navigate([`/dashboard/detalle/${tipo}/${item.id}`]);
   }
 
+get elementosFiltrados(): any[] {
+    const lista = this.vistaActual === 'personas' ? this.personas : this.grupos;
+    if (!this.buscarContenido?.trim()) return lista;
+    const term = this.buscarContenido.toLowerCase();
+    return lista.filter((item: any)=>
+      (item.nombre || '').toLowerCase().includes(term) ||
+      (item.apellidos || '').toLowerCase().includes(term) ||
+      (item.observaciones || '').toLowerCase().includes(term)
+    );
+  }
 }
 

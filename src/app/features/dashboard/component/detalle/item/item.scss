@@ -1,5 +1,4 @@
-@use 'src/styles/_buttons';
-
+@use '_buttons' as *;
 .container {
   max-width: 720px;
   margin: 2.5rem auto;

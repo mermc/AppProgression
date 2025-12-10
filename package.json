@@ -38,6 +38,8 @@
     "@capacitor/android": "^7.4.4",
     "@capacitor/cli": "^7.4.4",
     "@capacitor/core": "^7.4.4",
+    "@capacitor/filesystem": "^7.1.5",
+    "@capacitor/share": "^7.0.3",
     "@dataconnect/generated": "file:src/dataconnect-generated",
     "chart.js": "^4.5.1",
     "express": "^5.1.0",

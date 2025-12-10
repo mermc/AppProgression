@@ -9,6 +9,9 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { NoRegistrosDialog } from './no-registro-dialog/no-registro-dialog';
 import { take } from 'rxjs/operators';
 import { MatIconModule } from '@angular/material/icon';
+import { Filesystem, Directory } from '@capacitor/filesystem';
+import { Share } from '@capacitor/share';
+
 
 
 Chart.register(...registerables);
@@ -400,17 +403,82 @@ export class RegistroStats implements OnInit {
     return `Último mes: ${last}. Total últimos ${this.monthsToShow} meses: ${total}.`;
   }
 
-  // Descargar gráfico como JPEG
-  descargarJPEG() {
-    const el = this.exportContainer?.nativeElement || this.chartCanvas.nativeElement;
-    html2canvas(el, { scale: 2 }).then(canvas => {
-      const link = document.createElement('a');
-      const safeName = (this.itemNombre || 'item').replace(/[^a-z0-9_\-]/gi, '_');
-      link.download = `estadistica_${safeName}.jpeg`;
-      link.href = canvas.toDataURL('image/jpeg', 0.92);
-      link.click();
+  // Descargar gráfico como JPEG compatible para web y app android
+  async descargarJPEG() {
+  try {
+    const el = this.exportContainer?.nativeElement || this.chartCanvas?.nativeElement;
+    if (!el) {
+      console.error('Elemento no encontrado!');
+      return;
+    }
+
+    // 1) Renderizar canvas con html2canvas
+    const canvas: HTMLCanvasElement = await html2canvas(el, { scale: 2 });
+    
+    // 2) Convertir canvas -> Blob (jpeg)
+    const blob: Blob | null = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.92));
+    if (!blob) {
+      console.error('canvas.toBlob devuelve null');
+      return;
+    }
+
+    // 3) Blob -> base64 (quitar prefijo)
+    const base64 = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve((reader.result as string).split(',')[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
     });
+
+    // 4) Componer nombre de archivo y ruta de escritura
+    const safeName = (this.itemNombre || 'item').replace(/[^a-z0-9_\-]/gi, '_');
+    const fileName = `estadistica_${safeName}.jpeg`;
+    const folder = 'Pictures/Progression'; // subcarpeta específica de la app dentro de Pictures
+
+    //Crear el directorio 
+    try {
+      await Filesystem.mkdir({
+        path: folder,
+        directory: Directory.External,
+        recursive: true // crea carpetas intermedias si no existen
+      });
+      console.log('Directorio creado o ya existe:', folder);
+    } catch (mkdirErr: any) {
+      // Si falla, registrar y continuar — a veces la ruta ya existe o la plataforma se comporta de manera diferente
+      console.warn('Error al crear directorio (puede estar bien):', mkdirErr);
+    }
+
+    // Escribir el archivo
+    const writeResult = await Filesystem.writeFile({
+      path: `${folder}/${fileName}`,
+      data: base64,
+      directory: Directory.External,
+    });
+
+    console.log('Resultado:', writeResult); // { uri: 'file://...' }
+
+    // 5) Obtener URI para compartir/abrir
+    const uriResult = await Filesystem.getUri({
+      directory: Directory.External,
+      path: `${folder}/${fileName}`,
+    });
+
+    const nativeUri = uriResult.uri;
+    console.log('Archivo guardado URI:', nativeUri);
+
+    // 6) Abrir diálogo nativo para compartir
+    await Share.share({
+      title: 'Estadística',
+      text: 'Aquí tienes la estadística como JPEG',
+      url: nativeUri
+    });
+
+    console.log('Diálogo abierto.');
+
+  } catch (err) {
+    console.error('Error en descargarJPEG:', err);
   }
+}
 
   volver() {
     this.router.navigate([

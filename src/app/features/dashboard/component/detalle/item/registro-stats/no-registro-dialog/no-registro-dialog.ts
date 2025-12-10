@@ -15,7 +15,6 @@ import { MatButtonModule } from '@angular/material/button';
     </mat-dialog-content>
 
     <mat-dialog-actions align="end" class="dialog-actions">
-      <!-- Use the app button classes so look & feel matches the rest of the app -->
       <button mat-raised-button class="app-btn btn-save" mat-dialog-close>
         Entendido
       </button>
@@ -34,15 +33,12 @@ import { MatButtonModule } from '@angular/material/button';
       margin-top: 8px;
     }
 
-    /* Safer local overrides to ensure consistent visuals with global theme */
     button.app-btn.btn-save {
       background: var(--cta-bg);
       color: var(--cta-text);
       border: none;
       box-shadow: 0 6px 14px rgba(12,192,223,0.12);
     }
-
-    /* Make sure stroked/default buttons (if used) use dark text */
     button.app-btn.btn-cancel,
     button.mat-stroked-button.btn-cancel {
       color: var(--text-strong) !important;

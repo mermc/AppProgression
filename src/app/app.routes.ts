@@ -76,6 +76,7 @@ export const routes: Routes = [
   // ESTADISTICAS
 {
   path: 'dashboard/detalle/:tipo/:id/items/:itemId/registros/estadisticas',
+  canActivate: [authGuard],
   loadComponent: () =>
     import('./features/dashboard/component/detalle/item/registro-stats/registro-stats').then(m => m.RegistroStats)
 },
