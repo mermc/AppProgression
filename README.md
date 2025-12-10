@@ -384,7 +384,7 @@ En lugar de una API REST tradicional, la aplicación utiliza directamente el SDK
 | Personas                 | `personas/{personaId}`                               | Alta, listado por `userId`, edición, borrado                 |
 | Grupos                   | `grupos/{grupoId}`                                  | Alta, listado por `userId`, edición, borrado                 |
 | Items de persona/grupo   | `{tipo}/{id}/items/{itemId}`                        | Alta, listado, edición, borrado                              |
-| Registros de un item     | `{tipo}/{id}/items/{itemId}/registros/{registroId}` | Alta y edición desde el mismo formulario, borrado, lectura para estadísticas |
+| Registros de un item     | `{tipo}/{id}/items/{itemId}/registros/{registroId}` | Alta y edición con el mismo formulario, borrado, lectura para estadísticas |
 
 ---
 
