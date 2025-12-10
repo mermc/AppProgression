@@ -4,8 +4,9 @@ Manual de usuario – Progression App
 Progression App es una aplicación web para registrar y visualizar la evolución de distintos aspectos (hábitos, actividades, indicadores) asociados a personas o grupos.
 Cada usuario dispone de su propio espacio privado, accesible mediante email y contraseña.
 2. Acceso a la aplicación
+
 2.1. Pantalla de inicio de sesión (Login)
-![Login](https://drive.google.com/file/d/1aDHFnUYM9XOVlP5eFybSE0qnEA4n2wKh/view?usp=sharing)
+
 Elementos principales:
 
     Campo Email*
