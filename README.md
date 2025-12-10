@@ -216,18 +216,15 @@ Componente `Detalle`:
 
 Componente `Item`:
 
-- Alta y edición de un **item** bajo:
-  - `personas/{id}/items` o
-  - `grupos/{id}/items`.
-- Campos principales:
-  - `descripcion`, `color`, `fecha`.
-- En alta:
-  - Crea documento con `createdAt` y `updatedAt` mediante `serverTimestamp()`.
-- En edición:
-  - Carga datos existentes y actualiza con nuevos valores (`updateDoc`).
-- Navegación:
-  - Volver al detalle del padre.
-  - Ir al listado de registros del item (`verRegistros`).
+- Alta y edición de un **item** bajo `personas/{id}/items` o `grupos/{id}/items`.
+- Usa `modoEdicion` para distinguir entre creación y edición:
+  - Si hay `itemId` en la ruta, carga el documento existente y entra en modo edición.
+- Botón “Guardar”:
+  - En alta, crea el item en la subcolección y redirige al listado de items del padre.
+  - En edición, actualiza el item y también redirige al listado de items.
+- Botón “Volver”:
+  - En creación, vuelve al detalle de la persona/grupo (`/dashboard/detalle/:tipo/:id`).
+  - En edición, vuelve a la lista de items (`/dashboard/detalle/:tipo/:id/items`).
 
 Componente `ItemList`:
 
@@ -252,14 +249,20 @@ Componente `RegistroList`:
 
 Componente `RegistroForm`:
 
-- Formulario standalone para **alta y edición** de registros.
+- Formulario standalone para alta y edición de registros.
+- Lee de la ruta: `:tipo`, `:id`, `:itemId` y opcionalmente `:registroId`.
+- Si existe `:registroId`:
+  - Activa `modoEdicion`.
+  - Carga el documento desde Firestore (`getDoc`) y rellena el formulario con sus datos (conversión de `Timestamp` a `Date` para el campo `fecha`).
 - Campos:
-  - `fecha` (por defecto, fecha actual).
+  - `fecha` (por defecto, fecha actual en alta).
   - `observaciones`.
-- Crea y actualiza documentos en:
-  - `{tipo}/{id}/items/{itemId}/registros/{registroId}`.
-- Utiliza `serverTimestamp()` para `createdAt`.
-- Redirige al listado de registros del item tras guardar.
+- En alta:
+  - Crea el documento en `{tipo}/{id}/items/{itemId}/registros` con `createdAt: serverTimestamp()`.
+- En edición:
+  - Actualiza el documento existente (`updateDoc`) y guarda `updatedAt: serverTimestamp()`.
+- Tras guardar, redirige siempre a la lista de registros del item.
+
 
 ---
 
@@ -381,7 +384,7 @@ En lugar de una API REST tradicional, la aplicación utiliza directamente el SDK
 | Personas                 | `personas/{personaId}`                               | Alta, listado por `userId`, edición, borrado                 |
 | Grupos                   | `grupos/{grupoId}`                                  | Alta, listado por `userId`, edición, borrado                 |
 | Items de persona/grupo   | `{tipo}/{id}/items/{itemId}`                        | Alta, listado, edición, borrado                              |
-| Registros de un item     | `{tipo}/{id}/items/{itemId}/registros/{registroId}` | Alta, listado, edición (reuse de formulario), borrado, stats |
+| Registros de un item     | `{tipo}/{id}/items/{itemId}/registros/{registroId}` | Alta y edición desde el mismo formulario, borrado, lectura para estadísticas |
 
 ---
 
