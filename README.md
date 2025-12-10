@@ -8,7 +8,7 @@ El objetivo de la aplicación es proporcionar una herramienta sencilla pero estr
 
 ## Manual de usuario
 
-[Abre el Manual](./.manual_usuario.md)
+[Abre el Manual](./manual_usuario.md)
 ---
 
 ## Stack tecnológico
