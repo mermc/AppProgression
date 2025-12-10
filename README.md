@@ -6,6 +6,9 @@ Aplicación web de seguimiento de bienestar y progreso personal, desarrollada co
 
 El objetivo de la aplicación es proporcionar una herramienta sencilla pero estructurada para registrar información periódica relacionada con el bienestar (por ejemplo, hábitos, rutinas o indicadores) y visualizar su evolución en el tiempo mediante gráficas interactivas. Cada usuario dispone de su propio espacio de datos, aislado del resto, gracias al diseño multi‑tenant sobre Firestore.
 
+## Manual de usuario
+
+[Manual de usuario](./docs/manualusuario_progression.md)
 ---
 
 ## Stack tecnológico
