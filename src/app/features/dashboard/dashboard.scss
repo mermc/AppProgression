@@ -133,10 +133,20 @@ gap: 18px;
 
 //Responsive
 @media (max-width: 768px) {
+  //ajuste boton para movil 
   .view-toggle {
+    padding: 2px 4px;
+    border-radius: 999px;
+
     .mat-button-toggle {
-      padding: 6px 12px;
-      font-size: 0.9rem;
+      padding: 4px 8px;
+      font-size: 0.8rem; 
+      gap: 4px;       
+      min-width: 0;          
+    }
+
+    mat-icon {
+      font-size: 18px;  
     }
   }
 

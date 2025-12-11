@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Firestore, collection, collectionData, query, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../../core/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -42,6 +43,8 @@ export class Dashboard implements OnInit {
   personas: any[] = [];
   grupos: any[] = [];
 
+  private subs = new Subscription();
+
   vistaActual: 'personas' | 'grupos' = 'personas';
   buscarContenido = '';
 
@@ -76,8 +79,12 @@ export class Dashboard implements OnInit {
     );
 
     // suscribimos una vez para tener arrays en memoria
-    this.personas$.subscribe(p => this.personas = p);
-    this.grupos$.subscribe(g => this.grupos = g);
+    this.subs.add(
+      this.personas$.subscribe(p => this.personas = p)
+    );
+    this.subs.add(
+      this.grupos$.subscribe(g => this.grupos = g)
+    );
   }
 
   cambiarVista(tipo: 'personas' | 'grupos'): void {
@@ -102,6 +109,10 @@ get elementosFiltrados(): any[] {
       (item.apellidos || '').toLowerCase().includes(term) ||
       (item.observaciones || '').toLowerCase().includes(term)
     );
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 }
 
