@@ -1,10 +1,10 @@
 # Progression App
 
-Aplicación web de seguimiento de bienestar y progreso personal, desarrollada con Angular 20 y Firebase. La aplicación permite a cada usuario autenticado gestionar sus propias personas y grupos, asociarles items (hábitos, actividades, indicadores, etc.) y registrar eventos sobre esos items, generando estadísticas y gráficos de evolución.
+Aplicación web de seguimiento y progreso personal, desarrollada con Angular 20 y Firebase. La aplicación permite a cada usuario autenticado gestionar sus propias personas y grupos, asociarles items (hábitos, actividades, indicadores, etc.) y registrar eventos sobre esos items, generando estadísticas y gráficos de evolución.
 
 ## Descripción general
 
-El objetivo de la aplicación es proporcionar una herramienta sencilla pero estructurada para registrar información periódica relacionada con el bienestar (por ejemplo, hábitos, rutinas o indicadores) y visualizar su evolución en el tiempo mediante gráficas interactivas. Cada usuario dispone de su propio espacio de datos, aislado del resto, gracias al diseño multi‑tenant sobre Firestore.
+El objetivo de la aplicación es proporcionar una herramienta sencilla pero estructurada para registrar información periódica (por ejemplo, hábitos, rutinas o indicadores) y visualizar su evolución en el tiempo mediante gráficas interactivas. Así profesionales de la enseñanza, la psicología o incluso personas individuales pueden hacer seguimiento de los items que consideren. Cada usuario dispone de su propio espacio de datos, aislado del resto, gracias al diseño multi‑tenant sobre Firestore.
 
 ## Manual de usuario
 
@@ -103,7 +103,7 @@ El backend de datos se basa íntegramente en **Firestore Database**, con un dise
   - `lastSignInTime`: Date / Timestamp.
 
 - `personas/{personaId}`  
-  Representa una persona asociada al usuario.
+  Representa una persona creada y asociada al usuario.
 
   Campos típicos:
   - `nombre`: string.
@@ -112,7 +112,7 @@ El backend de datos se basa íntegramente en **Firestore Database**, con un dise
   - `userId`: string (UID del propietario).
 
 - `grupos/{grupoId}`  
-  Representa un grupo (por ejemplo, equipo, familia, etc.) asociado al usuario.
+  Representa un grupo (por ejemplo, equipo, familia, etc.) creado y asociado al usuario.
 
   Campos típicos:
   - `nombre`: string.
@@ -266,7 +266,6 @@ Componente `RegistroForm`:
   - Actualiza el documento existente (`updateDoc`) y guarda `updatedAt: serverTimestamp()`.
 - Tras guardar, redirige siempre a la lista de registros del item.
 
-
 ---
 
 ## Estadísticas y visualización
@@ -278,10 +277,11 @@ Componente `RegistroStats`:
   - Agregación por mes de los registros (últimos 3, 6 o 12 meses).
   - Cálculo de variaciones mes a mes (porcentaje de cambio).
   - Cálculo de tendencia mediante regresión lineal.
-  - Posibilidad de comparar varios items a la vez:
+  - Posibilidad de comparar varios items a la vez y/o mostrarlos de forma combinada:
     - Cada item se representa con color propio.
     - Barras de recuento + línea de tendencia por item.
-  - Exportación de la gráfica a JPEG con `html2canvas`.
+  - Exportación de la gráfica a JPEG con `html2canvas` y en web se guarda en descargas.
+  - En Android se guarda en la carpeta `Pictures/Progression` y se abre un dialog para **compartir la imagen** (por ejemplo, por correo o mensajería).
 
 En caso de que se quiera añadir a la comparación un item sin registros, se muestra un diálogo `NoRegistrosDialog` avisando de que no hay datos suficientes para graficar.
 
