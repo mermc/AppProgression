@@ -10,7 +10,7 @@ El objetivo de la aplicación es proporcionar una herramienta sencilla pero estr
 
 [Manual](./src/docs/manualusuario_progression.md)
 
-[DeepWiki] (https://deepwiki.com/mermc/AppProgression)
+[DeepWiki](https://deepwiki.com/mermc/AppProgression)
 
 ---
 
