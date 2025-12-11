@@ -8,7 +8,7 @@ El objetivo de la aplicación es proporcionar una herramienta sencilla pero estr
 
 ## Manual de usuario
 
-[Manual](./manualusuario.md)
+[Manual](./manual_usuario.md)
 
 [DeepWiki](https://deepwiki.com/mermc/AppProgression)
 
