@@ -10,7 +10,8 @@ El objetivo de la aplicación es proporcionar una herramienta sencilla pero estr
 
 [Manual de Usuario](./manual_usuario.md)
 
-[DeepWiki Documentación técnica ampliada] (https://deepwiki.com/mermc/AppProgression)
+[Documentación técnica ampliada](https://deepwiki.com/mermc/AppProgression)
+
 ---
 
 ## Stack tecnológico
