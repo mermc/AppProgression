@@ -11,8 +11,7 @@ import { take } from 'rxjs/operators';
 import { MatIconModule } from '@angular/material/icon';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
-
-
+import { Capacitor } from '@capacitor/core'; 
 
 Chart.register(...registerables);
 
@@ -403,8 +402,9 @@ export class RegistroStats implements OnInit {
     return `Último mes: ${last}. Total últimos ${this.monthsToShow} meses: ${total}.`;
   }
 
+  
   // Descargar gráfico como JPEG compatible para web y app android
-  async descargarJPEG() {
+async descargarJPEG() {
   try {
     const el = this.exportContainer?.nativeElement || this.chartCanvas?.nativeElement;
     if (!el) {
@@ -412,73 +412,90 @@ export class RegistroStats implements OnInit {
       return;
     }
 
-    // 1) Renderizar canvas con html2canvas
+    // Renderizar canvas con html2canvas
     const canvas: HTMLCanvasElement = await html2canvas(el, { scale: 2 });
     
-    // 2) Convertir canvas -> Blob (jpeg)
+    // Convertir canvas -> Blob (jpeg)
     const blob: Blob | null = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.92));
     if (!blob) {
       console.error('canvas.toBlob devuelve null');
       return;
     }
 
-    // 3) Blob -> base64 (quitar prefijo)
-    const base64 = await new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve((reader.result as string).split(',')[1]);
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-
-    // 4) Componer nombre de archivo y ruta de escritura
-    const safeName = (this.itemNombre || 'item').replace(/[^a-z0-9_\-]/gi, '_');
-    const fileName = `estadistica_${safeName}.jpeg`;
-    const folder = 'Pictures/Progression'; // subcarpeta específica de la app dentro de Pictures
-
-    //Crear el directorio 
-    try {
-      await Filesystem.mkdir({
-        path: folder,
-        directory: Directory.External,
-        recursive: true // crea carpetas intermedias si no existen
+    // Web vs Nativo 
+    if (Capacitor.isNativePlatform()) {
+      // 3) Blob -> base64 (quitar prefijo) - SOLO PARA ANDROID/iOS
+      const base64 = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve((reader.result as string).split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
       });
-      console.log('Directorio creado o ya existe:', folder);
-    } catch (mkdirErr: any) {
-      // Si falla, registrar y continuar — a veces la ruta ya existe o la plataforma se comporta de manera diferente
-      console.warn('Error al crear directorio (puede estar bien):', mkdirErr);
+
+      // Componer nombre de archivo y ruta de escritura
+      const safeName = (this.itemNombre || 'item').replace(/[^a-z0-9_\-]/gi, '_');
+      const fileName = `estadistica_${safeName}.jpeg`;
+      const folder = 'Pictures/Progression'; // subcarpeta específica de la app dentro de Pictures
+
+      //Crear el directorio 
+      try {
+        await Filesystem.mkdir({
+          path: folder,
+          directory: Directory.External,
+          recursive: true // crea carpetas intermedias si no existen
+        });
+        console.log('Directorio creado o ya existe:', folder);
+      } catch (mkdirErr: any) {
+        // Si falla, registrar y continuar — a veces la ruta ya existe o la plataforma se comporta de manera diferente
+        console.warn('Error al crear directorio (puede estar bien):', mkdirErr);
+      }
+
+      // Escribir el archivo
+      const writeResult = await Filesystem.writeFile({
+        path: `${folder}/${fileName}`,
+        data: base64,
+        directory: Directory.External,
+      });
+
+      console.log('Resultado:', writeResult); 
+
+      // Obtener URI para compartir/abrir
+      const uriResult = await Filesystem.getUri({
+        directory: Directory.External,
+        path: `${folder}/${fileName}`,
+      });
+
+      const nativeUri = uriResult.uri;
+      console.log('Archivo guardado URI:', nativeUri);
+
+      //Abrir diálogo nativo para compartir
+      await Share.share({
+        title: 'Estadística',
+        text: 'Aquí tienes la estadística como JPEG',
+        url: nativeUri
+      });
+
+      console.log('Diálogo abierto.');
+    } else {
+      //WEB: Descarga directa (NO llega aquí en Android)
+      console.log(' Web platform - descarga directa');
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const safeName = (this.itemNombre || 'item').replace(/[^a-z0-9_\-]/gi, '_');
+      a.href = url;
+      a.download = `estadistica_${safeName}.jpeg`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      console.log('Imagen descargada en web');
     }
-
-    // Escribir el archivo
-    const writeResult = await Filesystem.writeFile({
-      path: `${folder}/${fileName}`,
-      data: base64,
-      directory: Directory.External,
-    });
-
-    console.log('Resultado:', writeResult); // { uri: 'file://...' }
-
-    // 5) Obtener URI para compartir/abrir
-    const uriResult = await Filesystem.getUri({
-      directory: Directory.External,
-      path: `${folder}/${fileName}`,
-    });
-
-    const nativeUri = uriResult.uri;
-    console.log('Archivo guardado URI:', nativeUri);
-
-    // 6) Abrir diálogo nativo para compartir
-    await Share.share({
-      title: 'Estadística',
-      text: 'Aquí tienes la estadística como JPEG',
-      url: nativeUri
-    });
-
-    console.log('Diálogo abierto.');
 
   } catch (err) {
     console.error('Error en descargarJPEG:', err);
   }
 }
+
 
   volver() {
     this.router.navigate([
